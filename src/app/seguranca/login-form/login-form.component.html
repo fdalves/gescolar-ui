@@ -1,0 +1,41 @@
+<div class="login-body" style=" position: absolute;width: 100%;height: 100%;">
+  <form autocomplete="off" #f="ngForm">
+
+
+    <div class="login-panel ui-fluid">
+          <div class="login-panel-header">
+              <img src="../../../assets/layout/images/logo-slim.png">
+          </div>
+          <div class="login-panel-content">
+              <div class="ui-g">
+                  <div class="ui-g-12">
+                      <h1>Informe Login e Senha</h1>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input type="text" pInputText name="usuario"
+                          ngModel required #usuario>
+                          <label>Login</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input type="password" pInputText name="senha"
+                          ngModel required #senha>
+                          <label>Senha</label>
+                      </span>
+                  </div>
+                  <div class="ui-g-12">
+                      <button type="submit" label="Login" pButton icon="fa ui-icon-person"  [disabled]="!f.valid"
+                       (click)="login(usuario.value, senha.value); senha.value = '';"></button>
+                  </div>
+
+                </div>
+          </div>
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,231 @@
+<div class="ui-fluid">
+  <div class="card no-margin">
+    <form [formGroup]="formulario" (ngSubmit)="salvar()" autocomplete="off">
+
+      <h1>
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Aluno</h1>
+      </h1>
+
+      <div class="ui-g form-group">
+
+
+        <div class="ui-g-12 ui-md-12">
+          <span class="md-inputfield">
+            <input type="text" pInputText formControlName="nome" name="nome">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['nome'].valid&&formulario.controls['nome'].dirty">
+              <span *ngIf="formulario.controls['nome'].errors['required']">O Campo Nome é Obrigatório.</span>
+              <span *ngIf="formulario.controls['nome'].errors['minlength']">O Campo Nome deve conter no mínimo 4 caracteres.</span>
+            </div>
+            <label>Name</label>
+          </span>
+        </div>
+
+
+        <div class="ui-g-12 ui-md-12">
+          <span class="md-inputfield">
+            <input type="text" pInputText formControlName="matricula" name="matricula">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['matricula'].valid&&formulario.controls['matricula'].dirty">
+              <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['required'] : false">O Campo Matricula é Obrigatório.</span>
+              <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['minlength'] : false">O Campo Matricula deve conter no mínimo 4 caracteres.</span>
+              <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['matriculaExistente'] : false">Matricula já cadastrata.</span>
+            </div>
+
+            <label>Matricula</label>
+          </span>
+
+          <p-progressSpinner [hidden]="!pesquisandoMatriculaValida" [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
+
+        </div>
+
+
+        <div class="ui-g-12 ui-md-12" formGroupName="turma">
+          <p-dropdown [options]="turmas" placeholder="Selecione Turma" [filter]="true" [autoWidth]="false" formControlName="codigo"></p-dropdown>
+        </div>
+
+
+
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12 ui-md-12">
+            <label>Sexo</label>
+          </div>
+          <div class="ui-g-12 ui-md-12">
+            <p-radioButton formControlName="sexo" name="sexo" value="M" label="Masculino"></p-radioButton>
+          </div>
+          <div class="ui-g-12 ui-md-12">
+            <p-radioButton formControlName="sexo" name="sexo" value="F" label="Feminino"></p-radioButton>
+          </div>
+        </div>
+
+
+        <div class="ui-g-12 ui-md-8" style="text-align: center;">
+          <div class="ui-g-12 ui-md-3 ui-g-nopad" style="text-align: center;">
+
+            <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
+
+            <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Adicionar Foto" accept="image/*"
+              [url]="urlUploadAnexo" (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)" (onError)="erroUpload($event)"></p-fileUpload>
+
+            <p-progressSpinner [hidden]="!uploadEmAndamento" [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
+
+          </div>
+        </div>
+
+
+        <div class="ui-g-12 ui-md-12">
+
+
+          <p-fieldset legend="Responsáveis" [toggleable]="true" [collapsed]="true">
+
+            <div class="ui-g-12 ui-md-2">
+              <button pButton type="button" label="Adicionar" (click)="novoResp()" icon="ui-icon-add-circle"></button>
+            </div>
+
+            <div class="ui-g-12 ui-md-2">
+              <button pButton type="button" label="Pesquisa Resp." (click)="pesquisarResp()" icon="ui-icon-search"></button>
+            </div>
+
+            <div class="ui-g-12 ui-md-12">
+              <p-table [value]="responsaveis">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Parentesco</th>
+                    <th>CPF</th>
+                    <th>Celular</th>
+                    <th style="width:5em; text-align: center">Editar</th>
+                    <th style="width:5em; text-align: center">Excluir</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-resp let-rowIndex="rowIndex">
+                  <tr>
+                    <td>{{resp.nome}}</td>
+                    <td>{{resp.parentesco}}</td>
+                    <td>{{resp.cpf}}</td>
+                    <td>{{resp.celular}}</td>
+                    <td style="width:5em; text-align: center">
+                      <a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" (click)="prepararEdicaoResp(resp, rowIndex)" ></a>
+                    </td>
+                    <td style="width:5em; text-align: center">
+                      <button pButton icon="ui-icon-delete" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(aluno)"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="6">
+                      Nenhum Responsável Cadastrado
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </p-fieldset>
+
+        </div>
+
+
+      </div>
+
+      <div class="ui-g">
+        <p></p>
+      </div>
+      <hr>
+
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-3 ">
+          <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid || uploadEmAndamento" icon="ui-icon-save"></button>
+        </div>
+        <div class="ui-g-12 ui-md-3">
+          <button pButton type="button" label="Novo" (click)="novo()" icon="ui-icon-add-circle"></button>
+        </div>
+        <div class="ui-g-12 ui-md-3">
+          <button pButton type="button" icon="ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/alunos">
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+
+<p-dialog header="Responsável" [(visible)]="exbindoFormularioResp" [width]="500"  modal="modal" *ngIf="responsavel">
+  <form [formGroup]="formularioResp" (ngSubmit)="addResp()">
+
+   <div class="ui-fluid">
+    <div class="ui-g form-group ">
+
+      <div class="ui-g-12 ui-md-12">
+        <span class="md-inputfield">
+          <input type="text" pInputText formControlName="nome" name="nome">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formularioResp.controls['nome'].valid&&formularioResp.controls['nome'].dirty">
+            <span *ngIf="formularioResp.controls['nome'].errors['required']">O Campo Nome é Obrigatório.</span>
+            <span *ngIf="formularioResp.controls['nome'].errors['minlength']">O Campo Nome deve conter no mínimo 4 caracteres.</span>
+          </div>
+          <label>Name</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12 ui-md-12">
+        <span class="md-inputfield">
+          <p-inputMask mask="999.999.999-99" type="text" [cpf]="cpf" [(ngModel)]="cpf" formControlName="cpf" name="cpf"></p-inputMask>
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formularioResp.controls['cpf'].valid&&formularioResp.controls['cpf'].dirty">
+            <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['required'] : false">O Campo CPF é Obrigatório.</span>
+            <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['cpfExistente'] : false">CPF já Cadastrato.</span>
+            <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['cpfExistenteLocal'] : false">CPF já Cadastrato.</span>
+            <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['cpf'] : false">CPF inválido.</span>
+          </div>
+          <label>CPF</label>
+        </span>
+      </div>
+
+
+      <div class="ui-g-12 ui-md-12">
+          <span class="md-inputfield">
+            <input type="text" pInputText formControlName="parentesco" name="parentesco">
+            <label>Parentesco</label>
+          </span>
+        </div>
+
+      <div class="ui-g-12 ui-md-12">
+        <span class="md-inputfield">
+          <input type="text" pInputText formControlName="email" name="email">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formularioResp.controls['email'].valid&&formularioResp.controls['email'].dirty">
+            <span *ngIf="formularioResp.controls['email'].errors['pattern']">O Campo Email está invalido.</span>
+          </div>
+          <label>Email</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12 ui-md-12">
+        <span class="md-inputfield">
+          <p-inputMask mask="(99-9999-9999)" formControlName="telefone" name="telefone"></p-inputMask>
+          <label>Telefone</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12 ui-md-12">
+        <span class="md-inputfield">
+          <p-inputMask mask="(99-99999-9999)" formControlName="celular" name="celular"></p-inputMask>
+          <label>Celular</label>
+        </span>
+      </div>
+
+
+    </div>
+
+
+    <div class="ui-g">
+        <p></p>
+    </div>
+    <hr>
+
+    <div class="ui-g-12 ui-md-12 ">
+        <button pButton type="submit" label="Adiconar Responsável" [disabled]="formularioResp.invalid" icon="ui-icon-save"></button>
+    </div>
+
+    </div>
+  </form>
+</p-dialog>

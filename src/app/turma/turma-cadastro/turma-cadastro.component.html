@@ -1,0 +1,103 @@
+<div class="ui-fluid">
+  <div class="card no-margin">
+    <h1>Cadastro Turmas</h1>
+    <p-tabView>
+      <p-tabPanel header="Dados Gerais" leftIcon="ui-icon-check">
+        <p></p>
+        <form [formGroup]="formulario" (ngSubmit)="salvar()" autocomplete="off">
+          <div class="ui-g form-group">
+
+            <div class="ui-g-12 ui-md-12">
+              <span class="md-inputfield">
+                <input type="text" pInputText formControlName="nome" name="nome">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['nome'].valid&&formulario.controls['nome'].dirty">
+                  <span *ngIf="formulario.controls['nome'].errors['required']">O Campo Nome é Obrigatório.</span>
+                  <span *ngIf="formulario.controls['nome'].errors['minlength']">O Campo Nome deve conter no mínimo 4 caracteres.</span>
+                </div>
+                <label>Name</label>
+              </span>
+            </div>
+
+            <div class="ui-g-12 ui-md-12">
+              <span class="md-inputfield">
+                <input type="text" pInputText formControlName="sala" name="sala">
+                <label>Sala</label>
+              </span>
+            </div>
+
+            <div class="ui-g-12 ui-md-4">
+              <p-dropdown [options]="series" placeholder="Selecione Serie" [filter]="true" [autoWidth]="false" formControlName="serie"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-4">
+              <p-dropdown [options]="turnos" placeholder="Selecione Turno" [filter]="true" [autoWidth]="false" formControlName="turno"></p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+              <span class="md-inputfield">
+                <p-spinner formControlName="vagas"></p-spinner>
+                <label>Vagas Disponíveis</label>
+              </span>
+            </div>
+
+            <div class="ui-g-12 ui-md-12">
+              <p-accordion>
+                <p-accordionTab header="Periodos por Semana ">
+                  <p></p>
+                  <div class="ui-g form-group">
+
+                    <div class="ui-g-12 ui-md-4">
+                      <span class="md-inputfield">
+                          <p-dropdown [options]="diasSem" (change)="verificaDias()" formControlName="quantidadeDiasSemana"></p-dropdown>
+                      </span>
+                    </div>
+
+
+                    <div class="ui-g-12 ui-md-6">
+                        <p-table [value]="periodos">
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th>Dia Semana</th>
+                                <th>Quant Periodos</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-periodo let-rowIndex="rowIndex">
+                              <tr>
+                                <td>{{periodo.nome}}</td>
+                                <td>{{periodo.quant}}</td>
+                              </tr>
+                            </ng-template>
+
+                          </p-table>
+                    </div>
+
+                  </div>
+                </p-accordionTab>
+
+              </p-accordion>
+
+            </div>
+
+          </div>
+        </form>
+
+
+
+
+      </p-tabPanel>
+      <p-tabPanel header="Disciplinas" leftIcon="ui-icon-check">
+        Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
+        Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the
+        American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills
+        his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,
+        killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone,
+        Vito's communal stature grows.
+      </p-tabPanel>
+      <p-tabPanel header="Alunos" leftIcon="ui-icon-check">
+        After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third
+        and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
+        now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely
+        legitimate.
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
