@@ -47,7 +47,7 @@
 
                     <div class="ui-g-12 ui-md-4">
                       <span class="md-inputfield">
-                          <p-dropdown [options]="diasSem" (change)="verificaDias()" formControlName="quantidadeDiasSemana"></p-dropdown>
+                          <p-dropdown [options]="diasSem" (onChange)="onChange($event)" formControlName="quantidadeDiasSemana"></p-dropdown>
                       </span>
                     </div>
 
@@ -86,10 +86,7 @@
        teste
       </p-tabPanel>
       <p-tabPanel header="Alunos" leftIcon="ui-icon-check">
-        After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third
-        and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
-        now divorced from his wifeahahah Kay has nearly succeeded in keeping his promise that his family would one day be completely
-        legitimate.
+      teste
       </p-tabPanel>
     </p-tabView>
   </div>

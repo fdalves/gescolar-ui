@@ -21,8 +21,7 @@ export class TurmaCadastroComponent implements OnInit {
               {nome: 'Terça', value: 'TERCA', quant: 5 },
               {nome: 'Quarta', value: 'TERCA', quant: 5 },
               {nome: 'Quinta', value: 'TERCA', quant: 5 },
-              {nome: 'Sexta', value: 'TERCA', quant: 5 },
-              {nome: 'Sábado', value: 'TERCA', quant: 5 }];
+              {nome: 'Sexta', value: 'TERCA', quant: 5 }];
 
   quantDiasSemana = 5;
   diasSem: SelectItem [];
@@ -42,7 +41,7 @@ export class TurmaCadastroComponent implements OnInit {
       {label: '5 dias de Aula Por Semana', value: 5},
       {label: '6 dias de Aula Por Semana', value: 6}];
 
-    this.verificaDias();
+    
 
     const codigoTurma = this.route.snapshot.params['codigo'];
     this.configuraFormulario();
@@ -58,10 +57,20 @@ export class TurmaCadastroComponent implements OnInit {
 
   }
 
-  verificaDias() {
-    if (this.quantDiasSemana === 5) {
-      this.periodos.splice(5);
-    }
+  onChange(event: any) {
+
+    if (this.formulario.get('quantidadeDiasSemana') && 
+        this.formulario.get('quantidadeDiasSemana').value === 5 &&
+        this.periodos.length === 6) {
+          this.periodos.splice(5,1);
+    
+        }else if (this.formulario.get('quantidadeDiasSemana') && 
+        this.formulario.get('quantidadeDiasSemana').value === 6 && 
+        this.periodos.length === 5){
+          this.periodos.push({nome: 'Sábado', value: 'TERCA', quant: 5 });
+        }  
+
+   
   }
 
   configuraFormulario() {
@@ -73,7 +82,11 @@ export class TurmaCadastroComponent implements OnInit {
       'sala': [],
       'vagas': [],
       'quantidadeDiasSemana': 5,
-
+      'periodos':  [{nome: 'Segunda', value: 'SEGUNDA', quant: 5 },
+              {nome: 'Terça', value: 'TERCA', quant: 5 },
+              {nome: 'Quarta', value: 'TERCA', quant: 5 },
+              {nome: 'Quinta', value: 'TERCA', quant: 5 },
+              {nome: 'Sexta', value: 'TERCA', quant: 5 }]
     });
   }
 
