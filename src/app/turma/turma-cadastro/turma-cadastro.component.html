@@ -47,27 +47,43 @@
 
                     <div class="ui-g-12 ui-md-4">
                       <span class="md-inputfield">
-                          <p-dropdown [options]="diasSem" (onChange)="onChange($event)" formControlName="quantidadeDiasSemana"></p-dropdown>
+                        <p-dropdown [options]="diasSem" (onChange)="onChange($event)" formControlName="quantidadeDiasSemana"></p-dropdown>
                       </span>
                     </div>
 
 
                     <div class="ui-g-12 ui-md-6">
-                        <p-table [value]="periodos">
-                            <ng-template pTemplate="header">
-                              <tr>
-                                <th>Dia Semana</th>
-                                <th>Quant Periodos</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-periodo let-rowIndex="rowIndex">
-                              <tr>
-                                <td>{{periodo.nome}}</td>
-                                <td>{{periodo.quant}}</td>
-                              </tr>
-                            </ng-template>
+                      <p-table [value]="getPeriodos().controls">
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>Dia Semana</th>
+                            <th>Quant Periodos</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-periodo let-rowIndex="rowIndex">
 
-                          </p-table>
+                          <tr>
+                            <td>
+                              <div formArrayName="periodos">
+                                <div [formGroupName]="rowIndex">
+                                  <input pInputText formControlName="nome" readonly="true">
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div formArrayName="periodos">
+                                <div [formGroupName]="rowIndex">
+                                  <p-spinner formControlName="quant"></p-spinner>
+                                </div>
+                              </div>
+
+                            </td>
+
+                          </tr>
+
+                        </ng-template>
+
+                      </p-table>
                     </div>
 
                   </div>
@@ -83,10 +99,10 @@
 
       </p-tabPanel>
       <p-tabPanel header="Disciplinas" leftIcon="ui-icon-check">
-       teste
+        teste
       </p-tabPanel>
       <p-tabPanel header="Alunos" leftIcon="ui-icon-check">
-      teste
+        teste
       </p-tabPanel>
     </p-tabView>
   </div>
