@@ -43,11 +43,11 @@ export class TurmaCadastroComponent implements OnInit {
     }
     this.initSeries();
     this.initTurno();
-    this.addItem('Segunda', 'SEGUNDA', 5);
-    this.addItem('Terça', 'TERCA', 5);
-    this.addItem('Quarta', 'QUARTA', 5);
-    this.addItem('Quinta', 'QUINTA', 5);
-    this.addItem('Sexta', 'SEXTA', 5);
+    this.addItem('Segunda', '1', 5);
+    this.addItem('Terça', '2', 5);
+    this.addItem('Quarta', '3', 5);
+    this.addItem('Quinta', '4', 5);
+    this.addItem('Sexta', '5', 5);
   }
 
   onChange(event: any) {
@@ -58,7 +58,7 @@ export class TurmaCadastroComponent implements OnInit {
     } else if (this.formulario.get('quantidadeDiasSemana') &&
       this.formulario.get('quantidadeDiasSemana').value === 6 &&
       this.getPeriodos().controls.length === 5) {
-      this.addItem('Sábado', 'SABADO', 5);
+      this.addItem('Sábado', '6', 5);
     }
   }
 
@@ -74,6 +74,35 @@ export class TurmaCadastroComponent implements OnInit {
       'periodos': this.fb.array([])
     });
   }
+
+
+  get editando() {
+    return Boolean(this.formulario.get('codigo').value);
+  }
+
+
+  salvar() {
+    if (this.editando) {
+      this.atualizarTurma();
+    } else {
+      this.adicionarTurma();
+    }
+  }
+  atualizarTurma() {
+
+  }
+
+  adicionarTurma() {
+    console.log(this.formulario.value);
+
+    this.turmaService.adicionar(this.formulario.value)
+      .then(turmaAdicionada => {
+        this.messageService.addSucesso('Turma adicionada com sucesso!');
+        this.router.navigate(['/turmas', turmaAdicionada.codigo]);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
 
   createItem(nome: string, value: string, quant: number): FormGroup {
     return this.fb.group({

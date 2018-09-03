@@ -94,6 +94,27 @@
             </div>
 
           </div>
+
+
+          <div class="ui-g">
+            <p></p>
+          </div>
+          <hr>
+
+          <div class="ui-g">
+            <div class="ui-g-12 ui-md-3 ">
+              <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid" icon="fa ui-icon-save"></button>
+            </div>
+            <div class="ui-g-12 ui-md-3">
+              <button pButton type="button" label="Novo" (click)="novo()" icon="fa ui-icon-add-circle"></button>
+            </div>
+            <div class="ui-g-12 ui-md-3">
+              <button pButton type="button" icon="fa ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/turmas">
+              </button>
+            </div>
+          </div>
+
+
         </form>
 
 
