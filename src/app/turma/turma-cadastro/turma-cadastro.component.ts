@@ -31,16 +31,17 @@ export class TurmaCadastroComponent implements OnInit {
 
   ngOnInit() {
 
+    const codigoTurma = this.route.snapshot.params['codigo'];
+    if (codigoTurma) {
+      this.carregarTurma(codigoTurma);
+    }
+
     this.quantDiasSemana = 5;
     this.diasSem = [
       { label: '5 dias de Aula Por Semana', value: 5 },
       { label: '6 dias de Aula Por Semana', value: 6 }];
-    const codigoTurma = this.route.snapshot.params['codigo'];
     this.configuraFormulario();
     this.title.setTitle('Turma');
-    if (codigoTurma) {
-      this.carregarTurma(codigoTurma);
-    }
     this.initSeries();
     this.initTurno();
     this.addItem('Segunda', '1', 5);

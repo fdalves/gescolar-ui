@@ -1,3 +1,67 @@
-<p>
-  turma-pesquisa works!
-</p>
+<div class="ui-fluid">
+  <div class="ui-g">
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <div class="card no-margin">
+        <h1>Turmas</h1>
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-md-6">
+            <div class="ui-inputgroup">
+              <span class="md-inputfield">
+                <input type="text" pInputText [(ngModel)]="filtro.nome" name="nome">
+                <label>Pesquisar Turma</label>
+              </span>
+              <button pButton type="submit" icon="fa ui-icon-search"></button>
+            </div>
+          </div>
+
+          <div class="ui-g-12">
+
+            <p-table [value]="turmas" [responsive]="true" [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)"
+              [paginator]="true" [rows]="filtro.itensPorPagina">
+
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Nome</th>
+                  <th>Sala</th>
+                  <th>Série</th>
+                  <th>Turno</th>
+                  <th style="width:5em; text-align: center">Editar</th>
+                  <th style="width:5em; text-align: center">Excluir</th>
+                </tr>
+              </ng-template>
+
+
+              <ng-template pTemplate="body" let-turma>
+                <tr>
+                  <td>{{turma.nome}}</td>
+                  <td>{{turma.sala}}</td>
+                  <td>{{turma.serie}}</td>
+                  <td>{{turma.turno}}</td>
+                  <td style="width:5em; text-align: center">
+                    <a pButton icon="fa ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/turmas', turma.codigo]"></a>
+                  </td>
+                  <td style="width:5em; text-align: center">
+                    <button pButton icon="fa ui-icon-delete" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(turma)"></button>
+                  </td>
+
+                </tr>
+              </ng-template>
+
+
+
+
+            </p-table>
+          </div>
+
+          <div class="ui-g-12 ui-md-2">
+            <div class="shadow-box ui-shadow-3">
+              <button type="button" label="Adicionar" pButton icon="fa ui-icon-add" routerLink="/turmas/nova"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
