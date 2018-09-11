@@ -81,7 +81,7 @@ export class TurmaService {
   }
 
   buscarPorCodigo(codigo: number): Promise<Turma> {
-    return this.http.get(`${this.turmaUrl}/${codigo}`)
+    return this.http.get(`${this.turmaUrl}/getTurma/${codigo}`)
       .toPromise()
       .then(response => response.json() as Turma);
   }
