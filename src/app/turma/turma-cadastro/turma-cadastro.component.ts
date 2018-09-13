@@ -17,8 +17,6 @@ export class TurmaCadastroComponent implements OnInit {
   formulario: FormGroup;
   series = [];
   turnos = [];
-
-  quantDiasSemana = 5;
   diasSem: SelectItem[];
 
   constructor(private errorHandler: ErrorHandlerService,
@@ -36,7 +34,7 @@ export class TurmaCadastroComponent implements OnInit {
       this.carregarTurma(codigoTurma);
     }
 
-    this.quantDiasSemana = 5;
+
     this.diasSem = [
       { label: '5 dias de Aula Por Semana', value: 5 },
       { label: '6 dias de Aula Por Semana', value: 6 }];
@@ -49,9 +47,11 @@ export class TurmaCadastroComponent implements OnInit {
     this.addItem('Quarta', '3', 5);
     this.addItem('Quinta', '4', 5);
     this.addItem('Sexta', '5', 5);
+
   }
 
   onChange(event: any) {
+    console.log('entrou...');
     if (this.formulario.get('quantidadeDiasSemana') &&
       this.formulario.get('quantidadeDiasSemana').value === 5 &&
       this.getPeriodos().controls.length === 6) {
@@ -90,7 +90,14 @@ export class TurmaCadastroComponent implements OnInit {
     }
   }
   atualizarTurma() {
+    this.turmaService.atualizar(this.formulario.value)
+      .then(turma => {
+        this.formulario.patchValue(turma);
 
+        this.messageService.addSucesso('Turma editada com sucesso!');
+        this.atualizarTituloEdicao();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   adicionarTurma() {
