@@ -1,4 +1,5 @@
 
+
 export class Endereco {
   logradouro: string;
   numero: string;
@@ -51,6 +52,14 @@ export class Usuario {
 export class Turma {
   codigo: number;
   nome: String;
+  periodos: Periodo[];
+}
+
+
+export class Periodo {
+  quant: number;
+  nome: String;
+  value: String;
 }
 
 export class Aluno {

@@ -30,9 +30,7 @@ export class TurmaCadastroComponent implements OnInit {
   ngOnInit() {
 
     const codigoTurma = this.route.snapshot.params['codigo'];
-    if (codigoTurma) {
-      this.carregarTurma(codigoTurma);
-    }
+
 
 
     this.diasSem = [
@@ -47,6 +45,11 @@ export class TurmaCadastroComponent implements OnInit {
     this.addItem('Quarta', '3', 5);
     this.addItem('Quinta', '4', 5);
     this.addItem('Sexta', '5', 5);
+    this.onChange(null);
+
+    if (codigoTurma) {
+      this.carregarTurma(codigoTurma);
+    }
 
   }
 
@@ -134,6 +137,13 @@ export class TurmaCadastroComponent implements OnInit {
       .then(turma => {
         this.formulario.patchValue(turma);
         this.atualizarTituloEdicao();
+        console.log('entrou...');
+        console.log(turma);
+
+        if (turma.periodos[5]) {
+            this.addItem('Sábado', '6', turma.periodos[5].quant);
+        }
+
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

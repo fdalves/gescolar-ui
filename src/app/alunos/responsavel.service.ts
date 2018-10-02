@@ -5,7 +5,8 @@ import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
-import { Responsavel } from './../core/model';
+import { Responsavel } from '../core/model';
+
 
 export class ResponsavelFiltro {
   nome: string;
