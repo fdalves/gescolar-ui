@@ -1,8 +1,9 @@
+import { GescolarHttp } from './../seguranca/gescolar-http';
 import { Observable } from 'rxjs/Observable';
-import { URLSearchParams } from '@angular/http';
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { AuthHttp } from 'angular2-jwt';
+
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
@@ -22,29 +23,30 @@ export class AlunosService {
 
   alunoUrl: string;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: GescolarHttp) {
     this.alunoUrl = `${environment.apiUrl}/alunos`;
   }
 
   pesquisar(filtro: AlunoFiltro): Promise<any> {
-    const params = new URLSearchParams();
-
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    let params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
 
     if (filtro.nome) {
-      params.set('nome', filtro.nome);
+      params = params.append('nome', filtro.nome);
     }
 
     if (filtro.matricula) {
-      params.set('matricula', filtro.matricula);
+      params = params.append('matricula', filtro.matricula);
     }
 
-    return this.http.get(`${this.alunoUrl}`, { search: params })
+    return this.http.get<any>(`${this.alunoUrl}`, { params })
       .toPromise()
       .then(response => {
-        const responseJson = response.json();
-        const alunos = responseJson.content;
+        const alunos = response.content;
 
         for (const aluno of alunos) {
           if (aluno.urlFoto === null) {
@@ -54,7 +56,7 @@ export class AlunosService {
 
         const resultado = {
           alunos,
-          total: responseJson.totalElements
+          total: response.totalElements
         };
 
         console.log(resultado);
@@ -63,9 +65,9 @@ export class AlunosService {
   }
 
   listarTodas(): Promise<any> {
-    return this.http.get(this.alunoUrl)
+    return this.http.get<any>(this.alunoUrl)
       .toPromise()
-      .then(response => response.json().content);
+      .then(response => response.content);
   }
 
   excluir(codigo: number): Promise<void> {
@@ -76,32 +78,31 @@ export class AlunosService {
 
   adicionar(aluno: Aluno, responsaveis: Responsavel []): Promise<Aluno> {
     aluno.responsaveis = responsaveis;
-    return this.http.post(this.alunoUrl, JSON.stringify(aluno))
+    return this.http.post<Aluno>(this.alunoUrl, aluno)
       .toPromise()
-      .then(response => response.json());
+      .then(response => response);
   }
 
   atualizar(aluno: Aluno, responsaveis: Responsavel []): Promise<Aluno> {
     aluno.responsaveis = responsaveis;
-    return this.http.put(`${this.alunoUrl}/${aluno.codigo}`,
-        JSON.stringify(aluno))
+    return this.http.put<Aluno>(`${this.alunoUrl}/${aluno.codigo}`, aluno)
       .toPromise()
-      .then(response => response.json() as Aluno);
+      .then(response => response);
   }
 
   buscarPorCodigo(codigo: number): Promise<Aluno> {
-    return this.http.get(`${this.alunoUrl}/${codigo}`)
+    return this.http.get<Aluno>(`${this.alunoUrl}/${codigo}`)
       .toPromise()
-      .then(response => response.json() as Aluno);
+      .then(response => response);
   }
 
 
   matriculaExistente(matricula: String, codigo: string): Promise<boolean> {
-    const params = new URLSearchParams();
-    params.set('codigo', codigo);
-    return this.http.get(`${this.alunoUrl}/matriculaExistente/${matricula}`, { search: params })
+    let params = new HttpParams();
+    params = params.set('codigo', codigo);
+    return this.http.get<boolean>(`${this.alunoUrl}/matriculaExistente/${matricula}`, { params })
       .toPromise()
-      .then(response => response.json());
+      .then(response => response);
   }
 
 }

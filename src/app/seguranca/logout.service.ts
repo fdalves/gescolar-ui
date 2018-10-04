@@ -1,4 +1,5 @@
-import { AuthHttp } from 'angular2-jwt';
+import { GescolarHttp } from './gescolar-http';
+
 import { Injectable } from '@angular/core';
 
 import { environment } from './../../environments/environment';
@@ -10,7 +11,7 @@ export class LogoutService {
   tokensRenokeUrl: string;
 
   constructor(
-    private http: AuthHttp,
+    private http: GescolarHttp,
     private auth: AuthService
   ) {
     this.tokensRenokeUrl = `${environment.apiUrl}/tokens/revoke`;

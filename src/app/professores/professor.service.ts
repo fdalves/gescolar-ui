@@ -1,7 +1,11 @@
-import { URLSearchParams } from '@angular/http';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
+import { GescolarHttp } from './../seguranca/gescolar-http';
+
+
+import { URLSearchParams, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
-import { AuthHttp } from 'angular2-jwt';
+
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
@@ -18,25 +22,27 @@ export class ProfessorService {
 
   professorUrl: string;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: GescolarHttp) {
     this.professorUrl = `${environment.apiUrl}/professores`;
   }
 
   pesquisar(filtro: ProfessorFiltro): Promise<any> {
-    const params = new URLSearchParams();
 
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    let params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
 
     if (filtro.nome) {
-      params.set('nome', filtro.nome);
+      params = params.append('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.professorUrl}`, { search: params })
+    return this.http.get<any>(`${this.professorUrl}`, { params })
       .toPromise()
       .then(response => {
-        const responseJson = response.json();
-        const professores = responseJson.content;
+        const professores = response.content;
 
         for (const prof of professores) {
           if (prof.urlFoto === null) {
@@ -46,7 +52,7 @@ export class ProfessorService {
 
         const resultado = {
           professores,
-          total: responseJson.totalElements
+          total: response.totalElements
         };
 
         console.log(resultado);
@@ -55,9 +61,9 @@ export class ProfessorService {
   }
 
   listarTodas(): Promise<any> {
-    return this.http.get(this.professorUrl)
+    return this.http.get<any>(this.professorUrl)
       .toPromise()
-      .then(response => response.json().content);
+      .then(response => response.content);
   }
 
   excluir(codigo: number): Promise<void> {
@@ -67,32 +73,27 @@ export class ProfessorService {
   }
 
   adicionar(professor: Professor): Promise<Professor> {
-    return this.http.post(this.professorUrl, JSON.stringify(professor))
-      .toPromise()
-      .then(response => response.json());
+    return this.http.post<Professor>(this.professorUrl, professor)
+      .toPromise();
   }
 
   atualizar(professor: Professor): Promise<Professor> {
-    return this.http.put(`${this.professorUrl}/${professor.codigo}`,
-        JSON.stringify(professor))
-      .toPromise()
-      .then(response => response.json() as Professor);
+    return this.http.put<Professor>(`${this.professorUrl}/${professor.codigo}`, professor)
+      .toPromise();
   }
 
   buscarPorCodigo(codigo: number): Promise<Professor> {
-    return this.http.get(`${this.professorUrl}/${codigo}`)
-      .toPromise()
-      .then(response => response.json() as Professor);
+    return this.http.get<Professor>(`${this.professorUrl}/${codigo}`)
+      .toPromise();
   }
 
 
   cpfExistente(cpf: string, codigo: string): Promise<boolean> {
-    const params = new URLSearchParams();
-    params.set('codigo', codigo);
-    params.set('cpf', cpf);
-    return this.http.get(`${this.professorUrl}/cpfExistente`, { search: params })
-      .toPromise()
-      .then(response => response.json());
+    let params = new HttpParams();
+    params = params.append('codigo', codigo);
+    params = params.append('cpf', cpf);
+    return this.http.get<boolean>(`${this.professorUrl}/cpfExistente`, { params })
+      .toPromise();
   }
 
 }

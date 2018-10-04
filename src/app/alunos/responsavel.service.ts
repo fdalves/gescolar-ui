@@ -1,7 +1,10 @@
-import { URLSearchParams } from '@angular/http';
+import { HttpParams } from '@angular/common/http';
+import { GescolarHttp } from './../seguranca/gescolar-http';
+
+
 import { Injectable } from '@angular/core';
 
-import { AuthHttp } from 'angular2-jwt';
+
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
@@ -19,29 +22,30 @@ export class ResponsavelService {
 
   responsavelUrl: string;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: GescolarHttp) {
     this.responsavelUrl = `${environment.apiUrl}/responsaveis`;
   }
 
   pesquisar(filtro: ResponsavelFiltro): Promise<any> {
-    const params = new URLSearchParams();
-
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    let params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
 
     if (filtro.nome) {
-      params.set('nome', filtro.nome);
+      params = params.set('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.responsavelUrl}`, { search: params })
+    return this.http.get<any>(`${this.responsavelUrl}`, { search: params })
       .toPromise()
       .then(response => {
-        const responseJson = response.json();
-        const resp = responseJson.content;
+        const resp = response.content;
 
         const resultado = {
           resp,
-          total: responseJson.totalElements
+          total: response.totalElements
         };
 
         return resultado;
@@ -49,9 +53,9 @@ export class ResponsavelService {
   }
 
   listarTodas(): Promise<any> {
-    return this.http.get(this.responsavelUrl)
+    return this.http.get<any>(this.responsavelUrl)
       .toPromise()
-      .then(response => response.json().content);
+      .then(response => response.content);
   }
 
   excluir(codigo: number): Promise<void> {
@@ -61,22 +65,21 @@ export class ResponsavelService {
   }
 
   adicionar(responsavel: Responsavel): Promise<Responsavel> {
-    return this.http.post(this.responsavelUrl, JSON.stringify(responsavel))
+    return this.http.post<Responsavel>(this.responsavelUrl, responsavel)
       .toPromise()
-      .then(response => response.json());
+      .then(response => response);
   }
 
   atualizar(responsavel: Responsavel): Promise<Responsavel> {
-    return this.http.put(`${this.responsavelUrl}/${responsavel.codigo}`,
-        JSON.stringify(responsavel))
+    return this.http.put<Responsavel>(`${this.responsavelUrl}/${responsavel.codigo}`, responsavel)
       .toPromise()
-      .then(response => response.json() as Responsavel);
+      .then(response => response);
   }
 
   buscarPorCodigo(codigo: number): Promise<Responsavel> {
-    return this.http.get(`${this.responsavelUrl}/${codigo}`)
+    return this.http.get<Responsavel>(`${this.responsavelUrl}/${codigo}`)
       .toPromise()
-      .then(response => response.json() as Responsavel);
+      .then(response => response);
   }
 
 
@@ -84,9 +87,9 @@ export class ResponsavelService {
     const params = new URLSearchParams();
     params.set('codigo', codigo);
     params.set('cpf', cpf);
-    return this.http.get(`${this.responsavelUrl}/cpfExistente`, { search: params })
+    return this.http.get<boolean>(`${this.responsavelUrl}/cpfExistente`, { search: params })
       .toPromise()
-      .then(response => response.json());
+      .then(response => response);
   }
 
 }

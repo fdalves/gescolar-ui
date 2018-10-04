@@ -1,7 +1,10 @@
+import { HttpParams } from '@angular/common/http';
+import { GescolarHttp } from './../seguranca/gescolar-http';
+
 import { URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
-import { AuthHttp } from 'angular2-jwt';
+
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
@@ -18,47 +21,46 @@ export class TurmaService {
 
   turmaUrl: string;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: GescolarHttp) {
     this.turmaUrl = `${environment.apiUrl}/turmas`;
   }
 
   pesquisar(filtro: TurmaFiltro): Promise<any> {
-    const params = new URLSearchParams();
 
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    let params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
 
     if (filtro.nome) {
-      params.set('nome', filtro.nome);
+      params = params.append('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.turmaUrl}`, { search: params })
+    return this.http.get<any>(`${this.turmaUrl}`, { params })
       .toPromise()
       .then(response => {
-        const responseJson = response.json();
-        const turmas = responseJson.content;
+
+        const turmas = response.content;
 
         const resultado = {
           turmas,
-          total: responseJson.totalElements
+          total: response.totalElements
         };
 
-         return resultado;
+        return resultado;
       });
   }
 
   listarTodas(): Promise<any> {
-    return this.http.get(this.turmaUrl)
-      .toPromise()
-      .then(response => response.json().content);
+    return this.http.get<any>(this.turmaUrl)
+      .toPromise().then(response => response.content);
   }
 
   listarTodasSeries(): Promise<any> {
-    return this.http.get(`${this.turmaUrl}/series`)
-      .toPromise()
-      .then(response => {
-        return response.json();
-      });
+    return this.http.get<any>(`${this.turmaUrl}/series`)
+      .toPromise();
   }
 
   excluir(codigo: number): Promise<void> {
@@ -68,22 +70,18 @@ export class TurmaService {
   }
 
   adicionar(turma: Turma): Promise<Turma> {
-    return this.http.post(this.turmaUrl, JSON.stringify(turma))
-      .toPromise()
-      .then(response => response.json());
+    return this.http.post<Turma>(this.turmaUrl, turma)
+      .toPromise();
   }
 
   atualizar(turma: Turma): Promise<Turma> {
-    return this.http.put(`${this.turmaUrl}/${turma.codigo}`,
-        JSON.stringify(turma))
-      .toPromise()
-      .then(response => response.json() as Turma);
+    return this.http.put<Turma>(`${this.turmaUrl}/${turma.codigo}`, turma)
+      .toPromise();
   }
 
   buscarPorCodigo(codigo: number): Promise<Turma> {
-    return this.http.get(`${this.turmaUrl}/getTurma/${codigo}`)
-      .toPromise()
-      .then(response => response.json() as Turma);
+    return this.http.get<Turma>(`${this.turmaUrl}/getTurma/${codigo}`)
+      .toPromise();
   }
 
 

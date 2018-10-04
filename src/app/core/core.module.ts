@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { GescolarHttp } from './../seguranca/gescolar-http';
 import { TurmaService } from './../turma/turma.service';
 import { ResponsavelService } from './../alunos/responsavel.service';
 import { AlunosService } from './../alunos/alunos.service';
@@ -13,7 +15,7 @@ import { CommonModule } from '@angular/common';
 
 import { ConfirmationService } from 'primeng/components/common/api';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService  } from '@auth0/angular-jwt';
 
 import { AuthService } from './../seguranca/auth.service';
 import { ErrorHandlerService } from './error-handler.service';
@@ -27,7 +29,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule,
     ConfirmDialogModule,
     GrowlModule,
@@ -46,14 +48,13 @@ import {MessageService} from 'primeng/components/common/messageservice';
     ErrorHandlerService,
     AuthService,
     ConfirmationService,
-
+    GescolarHttp,
     ProfessorService,
     AlunosService,
     TurmaService,
     ResponsavelService,
-
     GrowMessageService,
-    JwtHelper,
+    JwtHelperService ,
     Title,
     MessageService,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
