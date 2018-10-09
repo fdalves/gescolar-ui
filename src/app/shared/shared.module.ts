@@ -7,12 +7,9 @@ import { MessageComponent } from './message/message.component';
 @NgModule({
   imports: [
     CommonModule,
-    GrowMessageService
   ],
-  declarations: [MessageComponent,
-    GrowMessageService],
-  exports: [MessageComponent,
-    GrowMessageService]
+  declarations: [MessageComponent],
+  exports: [MessageComponent]
 
 })
 export class SharedModule { }
