@@ -85,6 +85,7 @@ import {TreeTableModule} from 'primeng/primeng';
 
 import { CpfCnpjModule } from 'ng2-cpf-cnpj';
 import { TurmaRoutingModule } from './turma-routing.module';
+import { TurmaPeriodoComponent } from './turma-periodo/turma-periodo.component';
 
 
 @NgModule({
@@ -176,6 +177,6 @@ import { TurmaRoutingModule } from './turma-routing.module';
     CpfCnpjModule
 
   ],
-  declarations: [TurmaCadastroComponent, TurmaPesquisaComponent]
+  declarations: [TurmaCadastroComponent, TurmaPesquisaComponent, TurmaPeriodoComponent]
 })
 export class TurmaModule { }

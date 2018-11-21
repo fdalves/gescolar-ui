@@ -38,6 +38,8 @@ export class AppComponent implements OnDestroy, OnInit {
 
     resetMenu: boolean;
 
+    msgs: string;
+
     constructor(public renderer: Renderer,
                 public zone: NgZone,
                 private router: Router) {}

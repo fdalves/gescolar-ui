@@ -261,6 +261,11 @@ validateCpf(control: AbstractControl) {
     this.contatoIndex = index;
 
   }
+
+
+  pesquisarResp() {
+
+  }
 }
 
 

@@ -168,4 +168,7 @@ export class TurmaCadastroComponent implements OnInit {
     this.turnos[2] = { label: 'Noite', value: 'NOITE' };
   }
 
+  public novo() {
+
+  }
 }
