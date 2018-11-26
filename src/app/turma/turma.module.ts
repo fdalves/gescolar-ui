@@ -86,6 +86,8 @@ import {TreeTableModule} from 'primeng/primeng';
 import { CpfCnpjModule } from 'ng2-cpf-cnpj';
 import { TurmaRoutingModule } from './turma-routing.module';
 import { TurmaPeriodoComponent } from './turma-periodo/turma-periodo.component';
+import {DataViewModule} from 'primeng/dataview';
+import {CardModule} from 'primeng/card';
 
 
 @NgModule({
@@ -95,7 +97,10 @@ import { TurmaPeriodoComponent } from './turma-periodo/turma-periodo.component';
 
     FormsModule,
     ReactiveFormsModule,
+    CardModule,
 
+
+    DataViewModule,
     InputTextModule,
     ButtonModule,
     DataTableModule,

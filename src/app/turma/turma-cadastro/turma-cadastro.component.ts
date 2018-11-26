@@ -18,6 +18,7 @@ export class TurmaCadastroComponent implements OnInit {
   series = [];
   turnos = [];
   diasSem: SelectItem[];
+  codigo: number;
 
   constructor(private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
@@ -30,7 +31,7 @@ export class TurmaCadastroComponent implements OnInit {
   ngOnInit() {
 
     const codigoTurma = this.route.snapshot.params['codigo'];
-
+    this.codigo = codigoTurma;
 
 
     this.diasSem = [

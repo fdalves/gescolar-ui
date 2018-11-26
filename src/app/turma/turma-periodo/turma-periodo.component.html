@@ -1,3 +1,79 @@
-<p>
-  turma-periodo works!
-</p>
+<div class="ui-fluid">
+        <form>
+          <div class="ui-g form-group">
+
+            <div class="ui-g-12 ui-md-2">
+              <p-dataView [value]="segunda">
+                <p-header><h4> <p align="center">Segunda</p> </h4></p-header>
+                <ng-template let-periodo pTemplate="listItem">
+                    <div class="card shadow-box ui-shadow-2" >
+                        <h5><p align="center">{{periodo.periodo}}</p></h5>
+                    </div>
+                </ng-template>
+              </p-dataView>
+            </div>
+
+            <div class="ui-g-12 ui-md-2">
+                <p-dataView [value]="terca">
+                    <p-header><h4> <p align="center">Terça</p> </h4></p-header>
+                    <ng-template let-periodo pTemplate="listItem">
+                        <div class="card">
+                            <h5><p align="center">{{periodo.periodo}}</p></h5>
+                        </div>
+                    </ng-template>
+                </p-dataView>
+              </div>
+
+              <div class="ui-g-12 ui-md-2">
+                  <p-dataView [value]="quarta">
+                    <p-header><h4> <p align="center">Quarta</p> </h4></p-header>
+                    <ng-template let-periodo pTemplate="listItem">
+                        <div class="card">
+                            <h5><p align="center">{{periodo.periodo}}</p></h5>
+                        </div>
+                    </ng-template>
+                </p-dataView>
+                </div>
+
+                <div class="ui-g-12 ui-md-2">
+                    <p-dataView [value]="quinta">
+                        <p-header><h4> <p align="center">Quinta</p> </h4></p-header>
+                        <ng-template let-periodo pTemplate="listItem">
+                            <div class="card">
+                                <h5><p align="center">{{periodo.periodo}}</p></h5>
+                            </div>
+                        </ng-template>
+                    </p-dataView>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-2">
+                      <p-dataView [value]="sexta">
+                          <p-header><h4> <p align="center">Sexta</p> </h4></p-header>
+                          <ng-template let-periodo pTemplate="listItem">
+                              <div class="card">
+                                  <h5><p align="center">{{periodo.periodo}}</p></h5>
+                              </div>
+                          </ng-template>
+                      </p-dataView>
+                    </div>
+
+
+                    <div class="shadow-box ui-g-12 ui-md-2">
+                        <p-dataView [value]="sabado">
+                            <p-header><h4> <p align="center">Sábado</p> </h4></p-header>
+                            <ng-template let-periodo pTemplate="listItem">
+                                <div class="card">
+                                    <h5><p align="center">{{periodo.periodo}}</p></h5>
+                                </div>
+                            </ng-template>
+
+                        </p-dataView>
+                      </div>
+
+
+          </div>
+
+        </form>
+
+
+</div>

@@ -1,7 +1,16 @@
+
+
+body .ui-dataview .ui-dataview-header {
+  background-color: #c5dacf;
+}
+
+
+
 .col-valor {
   width: 120px;
   text-align: right;
 }
+
 
 .col-data {
   width: 120px;

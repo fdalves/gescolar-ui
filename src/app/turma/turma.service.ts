@@ -85,4 +85,9 @@ export class TurmaService {
   }
 
 
+  buscarTurmaPeriodo(codigo: number): Promise<any> {
+    return this.http.get<any>(`${this.turmaUrl}/getTurmaPeriodo/${codigo}`)
+      .toPromise();
+  }
+
 }
