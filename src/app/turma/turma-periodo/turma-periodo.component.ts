@@ -19,6 +19,7 @@ export class TurmaPeriodoComponent implements OnInit {
   quinta = [];
   sexta = [];
   sabado = [];
+  exbindoFormulario = false;
 
   constructor(private turmaService: TurmaService) { }
 
@@ -38,11 +39,14 @@ export class TurmaPeriodoComponent implements OnInit {
         this.quinta = periodos.quinta;
         this.sexta = periodos.sexta;
         this.sabado = periodos.sabado;
-
-        console.log('entrou..xxxxxxx');
-        console.log(this.periodos);
       })
       .catch(erro => console.log(erro));
   }
+
+
+  addDisciplina(){
+    this.exbindoFormulario = true;
+  }
+
 
 }

@@ -1,7 +1,13 @@
 <div class="ui-fluid">
         <form>
-          <div class="ui-g form-group">
+          
+            <div class="ui-g">
+            <div class="ui-g-12 ui-md-2">
+                <button pButton type="button" label="Adicionar Diciplia" (click)="addDisciplina()" icon="fa ui-icon-add-circle"></button>
+            </div>
+            </div>
 
+            <div class="ui-g form-group">
             <div class="ui-g-12 ui-md-2">
               <p-dataView [value]="segunda">
                 <p-header><h4> <p align="center">Segunda</p> </h4></p-header>
@@ -58,7 +64,7 @@
                     </div>
 
 
-                    <div class="shadow-box ui-g-12 ui-md-2">
+                    <div class="shadow-box ui-g-12 ui-md-2" *ngIf="sabado && sabado.length > 0 ">
                         <p-dataView [value]="sabado">
                             <p-header><h4> <p align="center">Sábado</p> </h4></p-header>
                             <ng-template let-periodo pTemplate="listItem">
@@ -77,3 +83,16 @@
 
 
 </div>
+
+<p-dialog header="Responsável" [(visible)]="exbindoFormulario" [width]="500"  modal="modal">
+  <form >
+
+   <div class="ui-fluid">
+    <div class="ui-g form-group ">
+
+    
+
+    </div>
+    </div>
+  </form>
+</p-dialog>
