@@ -20,9 +20,11 @@ export class TurmaFiltro {
 export class TurmaService {
 
   turmaUrl: string;
+  disciplinaUrl : string;
 
   constructor(private http: GescolarHttp) {
     this.turmaUrl = `${environment.apiUrl}/turmas`;
+    this.disciplinaUrl = `${environment.apiUrl}/disciplina`;
   }
 
   pesquisar(filtro: TurmaFiltro): Promise<any> {
@@ -87,6 +89,11 @@ export class TurmaService {
 
   buscarTurmaPeriodo(codigo: number): Promise<any> {
     return this.http.get<any>(`${this.turmaUrl}/getTurmaPeriodo/${codigo}`)
+      .toPromise();
+  }
+
+   listarDisciplinas(): Promise<any> {
+    return this.http.get<any>(`${this.disciplinaUrl}`)
       .toPromise();
   }
 

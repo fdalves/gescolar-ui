@@ -88,6 +88,8 @@ import { TurmaRoutingModule } from './turma-routing.module';
 import { TurmaPeriodoComponent } from './turma-periodo/turma-periodo.component';
 import {DataViewModule} from 'primeng/dataview';
 import {CardModule} from 'primeng/card';
+import { ProfessorService } from '../professores/professor.service';
+import { CoreModule } from '../core/core.module';
 
 
 @NgModule({

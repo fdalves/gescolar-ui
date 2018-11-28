@@ -1,5 +1,9 @@
+import { ProfessorService } from './../../professores/professor.service';
 import { TurmaService } from './../turma.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { ErrorHandlerService } from './../../core/error-handler.service';
+
+
 
 @Component({
   selector: 'app-turma-periodo',
@@ -20,12 +24,18 @@ export class TurmaPeriodoComponent implements OnInit {
   sexta = [];
   sabado = [];
   exbindoFormulario = false;
+  disciplinas = [];
+  professores = [];
 
-  constructor(private turmaService: TurmaService) { }
+  constructor(private turmaService: TurmaService,
+              private professorService: ProfessorService,
+              private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
-    console.log(this.codigoTurma);
+    console.log('testecccc..');
+    this.initDisciplina();
     this.initPeriodos();
+    this.initProfessores();
   }
 
 
@@ -44,9 +54,27 @@ export class TurmaPeriodoComponent implements OnInit {
   }
 
 
-  addDisciplina(){
+  addDisciplina() {
     this.exbindoFormulario = true;
   }
 
 
+  public initDisciplina() {
+    return this.turmaService.listarDisciplinas()
+    .then(disciplinas => {
+        this.disciplinas = disciplinas;
+        console.log(this.disciplinas);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+
+ public initProfessores() {
+    return this.professorService.listarTodas()
+    .then(professores => {
+        this.professores = professores;
+        console.log(this.professores);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
 }
