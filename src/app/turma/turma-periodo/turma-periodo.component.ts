@@ -1,3 +1,4 @@
+import { FormGroup, FormControl } from '@angular/forms';
 import { ProfessorService } from './../../professores/professor.service';
 import { TurmaService } from './../turma.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -17,6 +18,7 @@ export class TurmaPeriodoComponent implements OnInit {
   codigoTurma: number;
 
   periodos = [];
+  periodosSelecionado = [];
   segunda = [];
   terca = [];
   quarta = [];
@@ -26,16 +28,24 @@ export class TurmaPeriodoComponent implements OnInit {
   exbindoFormulario = false;
   disciplinas = [];
   professores = [];
+  disciplinaSelecionada: any;
+  professorSelecionado: any;
+  cols: any[];
 
   constructor(private turmaService: TurmaService,
               private professorService: ProfessorService,
               private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
-    console.log('testecccc..');
     this.initDisciplina();
     this.initPeriodos();
     this.initProfessores();
+
+    this.cols = [
+      { field: 'vin', header: 'Dia' },
+      { field: 'year', header: 'Periodo' }
+    ];
+
   }
 
 
@@ -62,8 +72,8 @@ export class TurmaPeriodoComponent implements OnInit {
   public initDisciplina() {
     return this.turmaService.listarDisciplinas()
     .then(disciplinas => {
-        this.disciplinas = disciplinas;
-        console.log(this.disciplinas);
+        this.disciplinas = disciplinas.
+        map(t => ({ label: t.nome, value: t.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -72,9 +82,13 @@ export class TurmaPeriodoComponent implements OnInit {
  public initProfessores() {
     return this.professorService.listarTodas()
     .then(professores => {
-        this.professores = professores;
+        this.professores = professores.
+        map(t => ({ label: t.nome, value: t.codigo }));
         console.log(this.professores);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
+
+  salvar(form: FormControl) {
+    }
 }

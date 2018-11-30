@@ -1,98 +1,196 @@
 <div class="ui-fluid">
-        <form>
-          
-            <div class="ui-g">
-            <div class="ui-g-12 ui-md-2">
-                <button pButton type="button" label="Adicionar Diciplia" (click)="addDisciplina()" icon="fa ui-icon-add-circle"></button>
+  <form>
+
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-2">
+        <button pButton type="button" label="Adicionar Diciplia" (click)="addDisciplina()" icon="fa ui-icon-add-circle"></button>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-2">
+        <p-dataView [value]="segunda">
+          <p-header>
+            <h4>
+              <p align="center">Segunda</p>
+            </h4>
+          </p-header>
+          <ng-template let-periodo pTemplate="listItem">
+            <div class="card shadow-box ui-shadow-2">
+              <h5>
+                <p align="center">{{periodo.periodo}}</p>
+              </h5>
             </div>
+          </ng-template>
+        </p-dataView>
+      </div>
+
+      <div class="ui-g-12 ui-md-2">
+        <p-dataView [value]="terca">
+          <p-header>
+            <h4>
+              <p align="center">Terça</p>
+            </h4>
+          </p-header>
+          <ng-template let-periodo pTemplate="listItem">
+            <div class="card">
+              <h5>
+                <p align="center">{{periodo.periodo}}</p>
+              </h5>
             </div>
+          </ng-template>
+        </p-dataView>
+      </div>
 
-            <div class="ui-g form-group">
-            <div class="ui-g-12 ui-md-2">
-              <p-dataView [value]="segunda">
-                <p-header><h4> <p align="center">Segunda</p> </h4></p-header>
-                <ng-template let-periodo pTemplate="listItem">
-                    <div class="card shadow-box ui-shadow-2" >
-                        <h5><p align="center">{{periodo.periodo}}</p></h5>
-                    </div>
-                </ng-template>
-              </p-dataView>
+      <div class="ui-g-12 ui-md-2">
+        <p-dataView [value]="quarta">
+          <p-header>
+            <h4>
+              <p align="center">Quarta</p>
+            </h4>
+          </p-header>
+          <ng-template let-periodo pTemplate="listItem">
+            <div class="card">
+              <h5>
+                <p align="center">{{periodo.periodo}}</p>
+              </h5>
             </div>
+          </ng-template>
+        </p-dataView>
+      </div>
 
-            <div class="ui-g-12 ui-md-2">
-                <p-dataView [value]="terca">
-                    <p-header><h4> <p align="center">Terça</p> </h4></p-header>
-                    <ng-template let-periodo pTemplate="listItem">
-                        <div class="card">
-                            <h5><p align="center">{{periodo.periodo}}</p></h5>
-                        </div>
-                    </ng-template>
-                </p-dataView>
-              </div>
+      <div class="ui-g-12 ui-md-2">
+        <p-dataView [value]="quinta">
+          <p-header>
+            <h4>
+              <p align="center">Quinta</p>
+            </h4>
+          </p-header>
+          <ng-template let-periodo pTemplate="listItem">
+            <div class="card">
+              <h5>
+                <p align="center">{{periodo.periodo}}</p>
+              </h5>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </div>
 
-              <div class="ui-g-12 ui-md-2">
-                  <p-dataView [value]="quarta">
-                    <p-header><h4> <p align="center">Quarta</p> </h4></p-header>
-                    <ng-template let-periodo pTemplate="listItem">
-                        <div class="card">
-                            <h5><p align="center">{{periodo.periodo}}</p></h5>
-                        </div>
-                    </ng-template>
-                </p-dataView>
-                </div>
-
-                <div class="ui-g-12 ui-md-2">
-                    <p-dataView [value]="quinta">
-                        <p-header><h4> <p align="center">Quinta</p> </h4></p-header>
-                        <ng-template let-periodo pTemplate="listItem">
-                            <div class="card">
-                                <h5><p align="center">{{periodo.periodo}}</p></h5>
-                            </div>
-                        </ng-template>
-                    </p-dataView>
-                  </div>
-
-                  <div class="ui-g-12 ui-md-2">
-                      <p-dataView [value]="sexta">
-                          <p-header><h4> <p align="center">Sexta</p> </h4></p-header>
-                          <ng-template let-periodo pTemplate="listItem">
-                              <div class="card">
-                                  <h5><p align="center">{{periodo.periodo}}</p></h5>
-                              </div>
-                          </ng-template>
-                      </p-dataView>
-                    </div>
+      <div class="ui-g-12 ui-md-2">
+        <p-dataView [value]="sexta">
+          <p-header>
+            <h4>
+              <p align="center">Sexta</p>
+            </h4>
+          </p-header>
+          <ng-template let-periodo pTemplate="listItem">
+            <div class="card">
+              <h5>
+                <p align="center">{{periodo.periodo}}</p>
+              </h5>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </div>
 
 
-                    <div class="shadow-box ui-g-12 ui-md-2" *ngIf="sabado && sabado.length > 0 ">
-                        <p-dataView [value]="sabado">
-                            <p-header><h4> <p align="center">Sábado</p> </h4></p-header>
-                            <ng-template let-periodo pTemplate="listItem">
-                                <div class="card">
-                                    <h5><p align="center">{{periodo.periodo}}</p></h5>
-                                </div>
-                            </ng-template>
+      <div *ngIf="sabado && sabado.length > 0 " class="shadow-box ui-g-12 ui-md-2">
+        <p-dataView [value]="sabado">
+          <p-header>
+            <h4>
+              <p align="center">Sábado</p>
+            </h4>
+          </p-header>
+          <ng-template let-periodo pTemplate="listItem">
+            <div class="card">
+              <h5>
+                <p align="center">{{periodo.periodo}}</p>
+              </h5>
+            </div>
+          </ng-template>
 
-                        </p-dataView>
-                      </div>
+        </p-dataView>
+      </div>
 
 
-          </div>
+    </div>
 
-        </form>
+  </form>
 
 
 </div>
 
-<p-dialog header="Responsável" [(visible)]="exbindoFormulario" [width]="500"  modal="modal">
-  <form >
+<p-dialog header="Disciplina" [(visible)]="exbindoFormulario"  modal="modal">
+  <div class="ui-fluid">
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
 
-   <div class="ui-fluid">
-    <div class="ui-g form-group ">
+      <div class="ui-g form-group ">
+        <div class="ui-g-12 ui-md-12">
+          <p-dropdown [options]="disciplinas" required placeholder="Selecione Disciplina" [filter]="true" [autoWidth]="false"
+            [(ngModel)]="disciplinaSelecionada" name="disciplinaSelecionada"></p-dropdown>
+        </div>
 
-    
 
+
+        <div class="ui-g-12 ui-md-12">
+          <p-dropdown [options]="professores" required placeholder="Selecione Professor" [filter]="true" [autoWidth]="false"
+            [(ngModel)]="professorSelecionado" name="professorSelecionado"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-12">
+          <h3>Periodos</h3>
+          <p-table [value]="periodos.all" selectionMode="multiple" [paginator]="true"
+              [(selection)]="periodosSelecionado"  [rows]="5">
+            <ng-template pTemplate="header" >
+              <tr>
+                <th>Dia</th>
+                <th>Periodo</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-periodo let-rowData let-rowIndex="rowIndex">
+              <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex">
+                <td>{{periodo.dia}}</td>
+                <td>{{periodo.periodo}}</td>
+               </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="6">
+                  Nenhum Responsável Cadastrado
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+              <ul>
+                <li *ngFor="let periodo of periodosSelecionado" style="text-align: left">
+                  {{periodo.dia + ' - ' + periodo.periodo}}
+                </li>
+              </ul>
+            </ng-template>
+
+          </p-table>
+
+
+
+        </div>
+
+      </div>
+
+    </form>
+    <div class="ui-g">
+      <p></p>
+      <p></p>
+      <p></p>
     </div>
+    <hr>
+
+    <div class="ui-g-12 ui-md-12 ">
+      <button pButton type="submit" label="Adiconar" [disabled]="f.invalid" icon="ui-icon-save"></button>
     </div>
-  </form>
+
+
+
+  </div>
 </p-dialog>
