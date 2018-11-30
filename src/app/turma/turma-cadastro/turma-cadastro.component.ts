@@ -170,6 +170,9 @@ export class TurmaCadastroComponent implements OnInit {
   }
 
   public novo() {
-
+    this.formulario.reset();
+    setTimeout(function () {
+    }.bind(this), 1);
+    this.router.navigate(['/turmas/nova']);
   }
 }
