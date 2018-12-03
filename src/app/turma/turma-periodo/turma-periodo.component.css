@@ -7,3 +7,9 @@
   overflow: scroll;
   max-height: 80%;
 }
+
+
+::ng-deep .card {
+  padding: 1px;
+  margin-bottom: 5px;
+}

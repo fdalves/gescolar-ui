@@ -37,9 +37,12 @@ export class TurmaPeriodoComponent implements OnInit {
     private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
-    this.initDisciplina();
-    this.initPeriodos();
-    this.initProfessores();
+    if (this.codigoTurma) {
+      this.initDisciplina();
+      this.initPeriodos();
+      this.initProfessores();
+    }
+
   }
 
 

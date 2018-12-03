@@ -19,6 +19,7 @@ export class TurmaCadastroComponent implements OnInit {
   turnos = [];
   diasSem: SelectItem[];
   codigo: number;
+  habilitaGuia = false;
 
   constructor(private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
@@ -50,6 +51,7 @@ export class TurmaCadastroComponent implements OnInit {
 
     if (codigoTurma) {
       this.carregarTurma(codigoTurma);
+      this.habilitaGuia = true;
     }
 
   }

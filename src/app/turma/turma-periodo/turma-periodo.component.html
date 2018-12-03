@@ -16,9 +16,9 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-            
+
             <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
-            
+
             <ng-template #thenBlock>
             <div  class="card shadow-box ui-shadow-2">
               <h5>
@@ -32,7 +32,7 @@
                   </h6>
             </div>
           </ng-template>
-            
+
           <ng-template #elseBlock>
             <div  class="card shadow-box ui-shadow-2">
               <h5>

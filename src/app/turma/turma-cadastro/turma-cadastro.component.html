@@ -1,5 +1,5 @@
 <div class="ui-fluid">
-  <div class="card no-margin">
+  <div class="no-margin">
     <h1>Cadastro Turmas</h1>
     <p-tabView>
       <p-tabPanel header="Dados Gerais" leftIcon="ui-icon-check">
@@ -119,7 +119,7 @@
 
 
       </p-tabPanel>
-      <p-tabPanel header="Disciplinas" leftIcon="ui-icon-check">
+      <p-tabPanel header="Disciplinas" leftIcon="ui-icon-check" [disabled]="!habilitaGuia">
         <app-turma-periodo [codigoTurma]="codigo" ></app-turma-periodo>
       </p-tabPanel>
       <p-tabPanel header="Alunos" leftIcon="ui-icon-check">
