@@ -16,11 +16,35 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-            <div class="card shadow-box ui-shadow-2">
+            
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            
+            <ng-template #thenBlock>
+            <div  class="card shadow-box ui-shadow-2">
               <h5>
                 <p align="center">{{periodo.periodo}}</p>
               </h5>
+              <h6>
+                  <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
+                </h6>
+                <h6>
+                    <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
+                  </h6>
             </div>
+          </ng-template>
+            
+          <ng-template #elseBlock>
+            <div  class="card shadow-box ui-shadow-2">
+              <h5>
+                <p align="center">{{periodo.periodo}}</p>
+              </h5>
+              <h6>
+                <p align="center">VAGO</p>
+              </h6>
+            </div>
+            </ng-template>
+
+
           </ng-template>
         </p-dataView>
       </div>
@@ -139,7 +163,7 @@
 
         <div class="ui-g-12 ui-md-12">
           <h3>Periodos</h3>
-          <p-table [value]="periodos.all" selectionMode="multiple" [paginator]="true"
+          <p-table [value]="periodosVagos" selectionMode="multiple" [paginator]="true"
               [(selection)]="periodosSelecionado"  [rows]="5">
             <ng-template pTemplate="header" >
               <tr>

@@ -17,7 +17,8 @@ export class TurmaPeriodoComponent implements OnInit {
   @Input()
   codigoTurma: number;
 
-  periodos = [];
+  periodos: any;
+  periodosVagos = [];
   periodosSelecionado = [];
   segunda = [];
   terca = [];
@@ -30,22 +31,15 @@ export class TurmaPeriodoComponent implements OnInit {
   professores = [];
   disciplinaSelecionada: any;
   professorSelecionado: any;
-  cols: any[];
 
   constructor(private turmaService: TurmaService,
-              private professorService: ProfessorService,
-              private errorHandler: ErrorHandlerService) { }
+    private professorService: ProfessorService,
+    private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
     this.initDisciplina();
     this.initPeriodos();
     this.initProfessores();
-
-    this.cols = [
-      { field: 'vin', header: 'Dia' },
-      { field: 'year', header: 'Periodo' }
-    ];
-
   }
 
 
@@ -59,8 +53,9 @@ export class TurmaPeriodoComponent implements OnInit {
         this.quinta = periodos.quinta;
         this.sexta = periodos.sexta;
         this.sabado = periodos.sabado;
+        this.periodosVagos = periodos.vagos;
       })
-      .catch(erro => console.log(erro));
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 
@@ -68,27 +63,25 @@ export class TurmaPeriodoComponent implements OnInit {
     this.exbindoFormulario = true;
   }
 
-
   public initDisciplina() {
     return this.turmaService.listarDisciplinas()
-    .then(disciplinas => {
+      .then(disciplinas => {
         this.disciplinas = disciplinas.
-        map(t => ({ label: t.nome, value: t.codigo }));
+          map(t => ({ label: t.nome, value: t.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
 
- public initProfessores() {
+  public initProfessores() {
     return this.professorService.listarTodas()
-    .then(professores => {
+      .then(professores => {
         this.professores = professores.
-        map(t => ({ label: t.nome, value: t.codigo }));
-        console.log(this.professores);
-      })
+          map(t => ({ label: t.nome, value: t.codigo }));
+        })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar(form: FormControl) {
-    }
+  }
 }

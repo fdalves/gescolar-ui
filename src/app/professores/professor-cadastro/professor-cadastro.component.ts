@@ -140,7 +140,6 @@ export class ProfessorCadastroComponent implements OnInit {
 
   aoTerminarUploadAnexo(event) {
     const foto = JSON.parse(event.xhr.response);
-    console.log(foto);
     this.formulario.patchValue({
       foto: foto.nome,
       urlFoto: foto.url

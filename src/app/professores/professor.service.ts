@@ -54,8 +54,6 @@ export class ProfessorService {
           professores,
           total: response.totalElements
         };
-
-        console.log(resultado);
         return resultado;
       });
   }

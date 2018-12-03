@@ -1,5 +1,4 @@
 
-
 export class Endereco {
   logradouro: string;
   numero: string;
@@ -91,4 +90,15 @@ export class Responsavel {
     this.parentesco = parentesco;
 
   }
+
 }
+
+
+export class DisciplinaTurma {
+  codigoTurma: number;
+  codigoDisciplina: number;
+  codigoProfessor: number;
+  dia: String;
+  periodo: String;
+}
+

@@ -55,7 +55,6 @@ export class TurmaCadastroComponent implements OnInit {
   }
 
   onChange(event: any) {
-    console.log('entrou...');
     if (this.formulario.get('quantidadeDiasSemana') &&
       this.formulario.get('quantidadeDiasSemana').value === 5 &&
       this.getPeriodos().controls.length === 6) {
@@ -105,8 +104,6 @@ export class TurmaCadastroComponent implements OnInit {
   }
 
   adicionarTurma() {
-    console.log(this.formulario.value);
-
     this.turmaService.adicionar(this.formulario.value)
       .then(turmaAdicionada => {
         this.messageService.addSucesso('Turma adicionada com sucesso!');
@@ -138,9 +135,6 @@ export class TurmaCadastroComponent implements OnInit {
       .then(turma => {
         this.formulario.patchValue(turma);
         this.atualizarTituloEdicao();
-        console.log('entrou...');
-        console.log(turma);
-
         if (turma.periodos[5]) {
             this.addItem('Sábado', '6', turma.periodos[5].quant);
         }

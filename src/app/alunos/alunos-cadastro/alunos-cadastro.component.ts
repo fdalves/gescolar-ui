@@ -153,7 +153,6 @@ export class AlunosCadastroComponent implements OnInit {
 
   aoTerminarUploadAnexo(event) {
     const foto = JSON.parse(event.xhr.response);
-    console.log(foto);
     this.formulario.patchValue({
       foto: foto.nome,
       urlFoto: foto.url
@@ -174,7 +173,6 @@ export class AlunosCadastroComponent implements OnInit {
   carregarTurmas() {
     return this.turmaService.listarTodas()
       .then(turmas => {
-        console.log(turmas);
         this.turmas = turmas
           .map(t => ({ label: t.nome, value: t.codigo }));
       })

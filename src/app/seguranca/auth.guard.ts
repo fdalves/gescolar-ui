@@ -30,7 +30,6 @@ export class AuthGuard implements CanActivate {
           return true;
         });
     } else if (next.data.roles && !this.auth.temQualquerPermissao(next.data.roles)) {
-      console.log('entrou...');
       this.router.navigate(['/nao-autorizado']);
       return false;
     }

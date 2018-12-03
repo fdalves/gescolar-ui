@@ -59,7 +59,6 @@ export class AlunosService {
           total: response.totalElements
         };
 
-        console.log(resultado);
         return resultado;
       });
   }
