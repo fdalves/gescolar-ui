@@ -87,4 +87,15 @@ export class TurmaPeriodoComponent implements OnInit {
 
   salvar(form: FormControl) {
   }
+
+  limparPopUp() {
+    this.periodosSelecionado = null;
+    this.disciplinaSelecionada = null;
+    this.professorSelecionado = null;
+  }
+
+  fecharPopUp() {
+    this.limparPopUp();
+    this.exbindoFormulario = false;
+  }
 }

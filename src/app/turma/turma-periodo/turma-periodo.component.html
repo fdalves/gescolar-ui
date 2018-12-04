@@ -21,12 +21,10 @@
 
             <ng-template #thenBlock>
             <div  class="card shadow-box ui-shadow-2">
-              <h5>
                 <p align="center">{{periodo.periodo}}</p>
-              </h5>
-              <h6>
+              <h5>
                   <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
-                </h6>
+                </h5>
                 <h6>
                     <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
                   </h6>
@@ -210,10 +208,18 @@
     </div>
     <hr>
 
-    <div class="ui-g-12 ui-md-12 ">
-      <button pButton type="submit" label="Adiconar" [disabled]="f.invalid" icon="ui-icon-save"></button>
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-3 ">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid  && !(periodosSelecionado && periodosSelecionado.size > 0)" icon="fa ui-icon-save"></button>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <button pButton type="button" label="Limpar" (click)="limparPopUp()" icon="fa ui-icon-add-circle"></button>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <button pButton type="button" icon="fa ui-icon-arrow-back" label="Voltar" (click)="fecharPopUp()" >
+        </button>
+      </div>
     </div>
-
 
 
   </div>
