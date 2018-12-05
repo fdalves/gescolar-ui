@@ -21,11 +21,11 @@
               <div class="ui-g dashboard shadow-box ui-shadow-2">
                   <div class="ui-g-12">
                     <div class="task-box task-box-3">
-                      <div class="task-box-header">
+                      <div class="task-box-header" style="text-align: center">
                         <strong>{{(rowIndex + 1)}}º Periodo</strong>
                         <a href="#" (click)="deletePeriodo(periodo,$event)"> <i class="material-icons">close</i></a>
                       </div>
-                      <div class="task-box-content">
+                      <div class="task-box-content" style="text-align: center">
                         <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
                       </div>
                     </div>
@@ -35,12 +35,12 @@
             <ng-template #elseBlock>
               <div class="ui-g dashboard shadow-box ui-shadow-2">
                 <div class="ui-g-12">
-                  <div class="task-box task-box-3">
+                  <div class="task-box task-box-3" style="text-align: center">
                     <div class="task-box-header">
                       <strong>{{(rowIndex + 1)}}º Periodo</strong>
                       <i class="material-icons">refresh</i>
                     </div>
-                    <div class="task-box-content">
+                    <div class="task-box-content" style="text-align: center">
                       <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
                     </div>
                   </div>
@@ -59,38 +59,38 @@
             </h4>
           </p-header>
           <ng-template let-periodo let-rowIndex="rowIndex" pTemplate="listItem">
-              <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
-              <ng-template #thenBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
-                    <div class="ui-g-12">
-                      <div class="task-box task-box-3">
-                        <div class="task-box-header">
-                          <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                          <i class="material-icons">refresh</i>
-                        </div>
-                        <div class="task-box-content">
-                          <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </ng-template>
-              <ng-template #elseBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
                   <div class="ui-g-12">
                     <div class="task-box task-box-3">
-                      <div class="task-box-header">
+                      <div class="task-box-header" style="text-align: center">
                         <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                        <i class="material-icons">refresh</i>
+                        <a href="#" (click)="deletePeriodo(periodo,$event)"> <i class="material-icons">close</i></a>
                       </div>
-                      <div class="task-box-content">
-                        <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                      <div class="task-box-content" style="text-align: center">
+                        <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </ng-template>
             </ng-template>
+            <ng-template #elseBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
+                <div class="ui-g-12">
+                  <div class="task-box task-box-3" style="text-align: center">
+                    <div class="task-box-header">
+                      <strong>{{(rowIndex + 1)}}º Periodo</strong>
+                      <i class="material-icons">refresh</i>
+                    </div>
+                    <div class="task-box-content" style="text-align: center">
+                      <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ng-template>
         </p-dataView>
       </div>
 
@@ -102,37 +102,37 @@
             </h4>
           </p-header>
           <ng-template let-periodo let-rowIndex="rowIndex" pTemplate="listItem">
-              <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
-              <ng-template #thenBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
-                    <div class="ui-g-12">
-                      <div class="task-box task-box-3">
-                        <div class="task-box-header">
-                          <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                          <i class="material-icons">refresh</i>
-                        </div>
-                        <div class="task-box-content">
-                          <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </ng-template>
-              <ng-template #elseBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
                   <div class="ui-g-12">
                     <div class="task-box task-box-3">
-                      <div class="task-box-header">
+                      <div class="task-box-header" style="text-align: center">
                         <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                        <i class="material-icons">refresh</i>
+                        <a href="#" (click)="deletePeriodo(periodo,$event)"> <i class="material-icons">close</i></a>
                       </div>
-                      <div class="task-box-content">
-                        <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                      <div class="task-box-content" style="text-align: center">
+                        <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </ng-template>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
+                <div class="ui-g-12">
+                  <div class="task-box task-box-3" style="text-align: center">
+                    <div class="task-box-header">
+                      <strong>{{(rowIndex + 1)}}º Periodo</strong>
+                      <i class="material-icons">refresh</i>
+                    </div>
+                    <div class="task-box-content" style="text-align: center">
+                      <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
@@ -145,37 +145,37 @@
             </h4>
           </p-header>
           <ng-template let-periodo let-rowIndex="rowIndex" pTemplate="listItem">
-              <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
-              <ng-template #thenBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
-                    <div class="ui-g-12">
-                      <div class="task-box task-box-3">
-                        <div class="task-box-header">
-                          <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                          <i class="material-icons">refresh</i>
-                        </div>
-                        <div class="task-box-content">
-                          <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </ng-template>
-              <ng-template #elseBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
                   <div class="ui-g-12">
                     <div class="task-box task-box-3">
-                      <div class="task-box-header">
+                      <div class="task-box-header" style="text-align: center">
                         <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                        <i class="material-icons">refresh</i>
+                        <a href="#" (click)="deletePeriodo(periodo,$event)"> <i class="material-icons">close</i></a>
                       </div>
-                      <div class="task-box-content">
-                        <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                      <div class="task-box-content" style="text-align: center">
+                        <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </ng-template>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
+                <div class="ui-g-12">
+                  <div class="task-box task-box-3" style="text-align: center">
+                    <div class="task-box-header">
+                      <strong>{{(rowIndex + 1)}}º Periodo</strong>
+                      <i class="material-icons">refresh</i>
+                    </div>
+                    <div class="task-box-content" style="text-align: center">
+                      <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
@@ -188,37 +188,37 @@
             </h4>
           </p-header>
           <ng-template let-periodo let-rowIndex="rowIndex" pTemplate="listItem">
-              <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
-              <ng-template #thenBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
-                    <div class="ui-g-12">
-                      <div class="task-box task-box-3">
-                        <div class="task-box-header">
-                          <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                          <i class="material-icons">refresh</i>
-                        </div>
-                        <div class="task-box-content">
-                          <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </ng-template>
-              <ng-template #elseBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
                   <div class="ui-g-12">
                     <div class="task-box task-box-3">
-                      <div class="task-box-header">
+                      <div class="task-box-header" style="text-align: center">
                         <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                        <i class="material-icons">refresh</i>
+                        <a href="#" (click)="deletePeriodo(periodo,$event)"> <i class="material-icons">close</i></a>
                       </div>
-                      <div class="task-box-content">
-                        <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                      <div class="task-box-content" style="text-align: center">
+                        <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </ng-template>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
+                <div class="ui-g-12">
+                  <div class="task-box task-box-3" style="text-align: center">
+                    <div class="task-box-header">
+                      <strong>{{(rowIndex + 1)}}º Periodo</strong>
+                      <i class="material-icons">refresh</i>
+                    </div>
+                    <div class="task-box-content" style="text-align: center">
+                      <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
@@ -232,38 +232,38 @@
             </h4>
           </p-header>
           <ng-template let-periodo let-rowIndex="rowIndex" pTemplate="listItem">
-              <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
-              <ng-template #thenBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
-                    <div class="ui-g-12">
-                      <div class="task-box task-box-3">
-                        <div class="task-box-header">
-                          <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                          <i class="material-icons">refresh</i>
-                        </div>
-                        <div class="task-box-content">
-                          <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </ng-template>
-              <ng-template #elseBlock>
-                <div class="ui-g dashboard shadow-box ui-shadow-2">
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
                   <div class="ui-g-12">
                     <div class="task-box task-box-3">
-                      <div class="task-box-header">
+                      <div class="task-box-header" style="text-align: center">
                         <strong>{{(rowIndex + 1)}}º Periodo</strong>
-                        <i class="material-icons">refresh</i>
+                        <a href="#" (click)="deletePeriodo(periodo,$event)"> <i class="material-icons">close</i></a>
                       </div>
-                      <div class="task-box-content">
-                        <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                      <div class="task-box-content" style="text-align: center">
+                        <p>Disci.:<strong>{{periodo.disciplinaTurma.nomeDisciplina}}</strong> Prof.:<strong>{{periodo.disciplinaTurma.nomeProfessor}}</strong></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </ng-template>
             </ng-template>
+            <ng-template #elseBlock>
+              <div class="ui-g dashboard shadow-box ui-shadow-2">
+                <div class="ui-g-12">
+                  <div class="task-box task-box-3" style="text-align: center">
+                    <div class="task-box-header">
+                      <strong>{{(rowIndex + 1)}}º Periodo</strong>
+                      <i class="material-icons">refresh</i>
+                    </div>
+                    <div class="task-box-content" style="text-align: center">
+                      <p>Disci.:<strong><font color="red">VAGO</font></strong> Prof.:<strong><font color="red">VAGO</font></strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ng-template>
         </p-dataView>
       </div>
     </div>

@@ -19,3 +19,7 @@
   margin: 0 0 0 0;
   padding: 0;
 }
+
+::ng-deep .dashboard .task-box.task-box-3 .task-box-header {
+  background-color: darkgray;
+}
