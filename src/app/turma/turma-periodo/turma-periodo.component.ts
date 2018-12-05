@@ -184,7 +184,6 @@ export class TurmaPeriodoComponent implements OnInit {
 
   deletePeriodo(perido: any, e: any) {
     e.preventDefault();
-    console.log(perido);
     }
 
 }
