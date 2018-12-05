@@ -122,7 +122,7 @@
       <p-tabPanel header="Disciplinas" leftIcon="ui-icon-check" [disabled]="!habilitaGuia">
         <app-turma-periodo [codigoTurma]="codigo" ></app-turma-periodo>
       </p-tabPanel>
-      <p-tabPanel header="Alunos" leftIcon="ui-icon-check">
+      <p-tabPanel header="Alunos" leftIcon="ui-icon-check" [disabled]="!habilitaGuia" >
         teste
       </p-tabPanel>
     </p-tabView>

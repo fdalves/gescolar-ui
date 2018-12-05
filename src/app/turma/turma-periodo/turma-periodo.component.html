@@ -16,33 +16,28 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-
             <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
-
             <ng-template #thenBlock>
-            <div  class="card shadow-box ui-shadow-2">
+              <div class="card shadow-box ui-shadow-2">
                 <p align="center">{{periodo.periodo}}</p>
-              <h5>
+                <h5>
                   <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
                 </h5>
                 <h6>
-                    <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
-                  </h6>
-            </div>
-          </ng-template>
-
-          <ng-template #elseBlock>
-            <div  class="card shadow-box ui-shadow-2">
-              <h5>
-                <p align="center">{{periodo.periodo}}</p>
-              </h5>
-              <h6>
-                <p align="center">VAGO</p>
-              </h6>
-            </div>
+                  <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
+                </h6>
+              </div>
             </ng-template>
-
-
+            <ng-template #elseBlock>
+              <div class="card shadow-box ui-shadow-2">
+                <h5>
+                  <p align="center">{{periodo.periodo}}</p>
+                </h5>
+                <h6>
+                  <p align="center">VAGO</p>
+                </h6>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
@@ -55,11 +50,28 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-            <div class="card">
-              <h5>
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="card shadow-box ui-shadow-2">
                 <p align="center">{{periodo.periodo}}</p>
-              </h5>
-            </div>
+                <h5>
+                  <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
+                </h5>
+                <h6>
+                  <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
+                </h6>
+              </div>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="card shadow-box ui-shadow-2">
+                <h5>
+                  <p align="center">{{periodo.periodo}}</p>
+                </h5>
+                <h6>
+                  <p align="center">VAGO</p>
+                </h6>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
@@ -72,11 +84,28 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-            <div class="card">
-              <h5>
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="card shadow-box ui-shadow-2">
                 <p align="center">{{periodo.periodo}}</p>
-              </h5>
-            </div>
+                <h5>
+                  <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
+                </h5>
+                <h6>
+                  <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
+                </h6>
+              </div>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="card shadow-box ui-shadow-2">
+                <h5>
+                  <p align="center">{{periodo.periodo}}</p>
+                </h5>
+                <h6>
+                  <p align="center">VAGO</p>
+                </h6>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
@@ -89,11 +118,28 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-            <div class="card">
-              <h5>
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="card shadow-box ui-shadow-2">
                 <p align="center">{{periodo.periodo}}</p>
-              </h5>
-            </div>
+                <h5>
+                  <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
+                </h5>
+                <h6>
+                  <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
+                </h6>
+              </div>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="card shadow-box ui-shadow-2">
+                <h5>
+                  <p align="center">{{periodo.periodo}}</p>
+                </h5>
+                <h6>
+                  <p align="center">VAGO</p>
+                </h6>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
@@ -106,17 +152,34 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-            <div class="card">
-              <h5>
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="card shadow-box ui-shadow-2">
                 <p align="center">{{periodo.periodo}}</p>
-              </h5>
-            </div>
+                <h5>
+                  <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
+                </h5>
+                <h6>
+                  <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
+                </h6>
+              </div>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="card shadow-box ui-shadow-2">
+                <h5>
+                  <p align="center">{{periodo.periodo}}</p>
+                </h5>
+                <h6>
+                  <p align="center">VAGO</p>
+                </h6>
+              </div>
+            </ng-template>
           </ng-template>
         </p-dataView>
       </div>
 
 
-      <div *ngIf="sabado && sabado.length > 0 " class="shadow-box ui-g-12 ui-md-2">
+      <div class="shadow-box ui-g-12 ui-md-2">
         <p-dataView [value]="sabado">
           <p-header>
             <h4>
@@ -124,25 +187,38 @@
             </h4>
           </p-header>
           <ng-template let-periodo pTemplate="listItem">
-            <div class="card">
-              <h5>
+            <div *ngIf="periodo.disciplinaTurma; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="card shadow-box ui-shadow-2">
                 <p align="center">{{periodo.periodo}}</p>
-              </h5>
-            </div>
+                <h5>
+                  <p align="center">{{periodo.disciplinaTurma.nomeDisciplina}}</p>
+                </h5>
+                <h6>
+                  <p align="center">{{periodo.disciplinaTurma.nomeProfessor}}</p>
+                </h6>
+              </div>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div class="card shadow-box ui-shadow-2">
+                <h5>
+                  <p align="center">{{periodo.periodo}}</p>
+                </h5>
+                <h6>
+                  <p align="center">VAGO</p>
+                </h6>
+              </div>
+            </ng-template>
           </ng-template>
-
         </p-dataView>
       </div>
-
-
     </div>
-
   </form>
 
 
 </div>
 
-<p-dialog header="Disciplina" [(visible)]="exbindoFormulario"  modal="modal">
+<p-dialog header="Disciplina" [(visible)]="exbindoFormulario" modal="modal">
   <div class="ui-fluid">
     <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
 
@@ -161,9 +237,9 @@
 
         <div class="ui-g-12 ui-md-12">
           <h3>Periodos</h3>
-          <p-table [value]="periodosVagos" selectionMode="multiple" [paginator]="true"
-              [(selection)]="periodosSelecionado"  [rows]="5">
-            <ng-template pTemplate="header" >
+          <p-table [value]="periodosVagos" selectionMode="multiple" [paginator]="true" [(selection)]="periodosSelecionado"
+            [rows]="5">
+            <ng-template pTemplate="header">
               <tr>
                 <th>Dia</th>
                 <th>Periodo</th>
@@ -173,7 +249,7 @@
               <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex">
                 <td>{{periodo.dia}}</td>
                 <td>{{periodo.periodo}}</td>
-               </tr>
+              </tr>
             </ng-template>
 
             <ng-template pTemplate="emptymessage">
@@ -193,34 +269,31 @@
             </ng-template>
 
           </p-table>
-
-
-
         </div>
+      </div>
 
+
+      <div class="ui-g">
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+      <hr>
+
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-3 ">
+          <button pButton type="submit" label="Salvar" [disabled]="(periodosSelecionado == null || periodosSelecionado.length == 0) || !f.valid"
+            icon="fa ui-icon-save"></button>
+        </div>
+        <div class="ui-g-12 ui-md-3">
+          <button pButton type="button" label="Limpar" (click)="limparPopUp()" icon="fa ui-icon-add-circle"></button>
+        </div>
+        <div class="ui-g-12 ui-md-3">
+          <button pButton type="button" icon="fa ui-icon-arrow-back" label="Voltar" (click)="fecharPopUp()">
+          </button>
+        </div>
       </div>
 
     </form>
-    <div class="ui-g">
-      <p></p>
-      <p></p>
-      <p></p>
-    </div>
-    <hr>
-
-    <div class="ui-g">
-      <div class="ui-g-12 ui-md-3 ">
-        <button pButton type="submit" label="Salvar" [disabled]="f.invalid" icon="fa ui-icon-save"></button>
-      </div>
-      <div class="ui-g-12 ui-md-3">
-        <button pButton type="button" label="Limpar" (click)="limparPopUp()" icon="fa ui-icon-add-circle"></button>
-      </div>
-      <div class="ui-g-12 ui-md-3">
-        <button pButton type="button" icon="fa ui-icon-arrow-back" label="Voltar" (click)="fecharPopUp()" >
-        </button>
-      </div>
-    </div>
-
-
   </div>
 </p-dialog>
