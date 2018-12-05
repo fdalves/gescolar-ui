@@ -182,4 +182,9 @@ export class TurmaPeriodoComponent implements OnInit {
     return disciplinaTurma;
   }
 
+  deletePeriodo(perido: any, e: any) {
+    e.preventDefault();
+    console.log(perido);
+    }
+
 }
