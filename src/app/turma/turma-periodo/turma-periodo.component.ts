@@ -1,3 +1,4 @@
+import { GrowMessageService } from './../../shared/grow-message.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProfessorService } from './../../professores/professor.service';
 import { TurmaService } from './../turma.service';
@@ -35,7 +36,8 @@ export class TurmaPeriodoComponent implements OnInit {
 
   constructor(private turmaService: TurmaService,
     private professorService: ProfessorService,
-    private errorHandler: ErrorHandlerService) { }
+    private errorHandler: ErrorHandlerService,
+    private messageService: GrowMessageService) { }
 
   ngOnInit() {
     if (this.codigoTurma) {
@@ -87,6 +89,7 @@ export class TurmaPeriodoComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    const disciplinaSalvas = [];
     for (const periodo of  this.periodosSelecionado) {
         if (periodo.dia === 'SEGUNDA') {
           for (const periodoSegunda of  this.segunda) {
@@ -94,6 +97,7 @@ export class TurmaPeriodoComponent implements OnInit {
                  const disciplinaTurma = this.getDiciplinaTurma();
                  this.removeVagos(periodoSegunda);
                  periodoSegunda.disciplinaTurma = disciplinaTurma;
+                 disciplinaSalvas.push(disciplinaTurma);
               }
           }
         }
@@ -104,6 +108,7 @@ export class TurmaPeriodoComponent implements OnInit {
                  const disciplinaTurma = this.getDiciplinaTurma();
                  this.removeVagos(periodoTerca);
                  periodoTerca.disciplinaTurma = disciplinaTurma;
+                 disciplinaSalvas.push(disciplinaTurma);
               }
           }
         }
@@ -114,6 +119,7 @@ export class TurmaPeriodoComponent implements OnInit {
                  const disciplinaTurma = this.getDiciplinaTurma();
                  this.removeVagos(periodoQuarta);
                  periodoQuarta.disciplinaTurma = disciplinaTurma;
+                 disciplinaSalvas.push(disciplinaTurma);
               }
           }
         }
@@ -124,6 +130,7 @@ export class TurmaPeriodoComponent implements OnInit {
                  const disciplinaTurma = this.getDiciplinaTurma();
                  this.removeVagos(periodoQinta);
                  periodoQinta.disciplinaTurma = disciplinaTurma;
+                 disciplinaSalvas.push(disciplinaTurma);
               }
           }
         }
@@ -134,6 +141,7 @@ export class TurmaPeriodoComponent implements OnInit {
                  const disciplinaTurma = this.getDiciplinaTurma();
                  this.removeVagos(periodoSexta);
                  periodoSexta.disciplinaTurma = disciplinaTurma;
+                 disciplinaSalvas.push(disciplinaTurma);
               }
           }
         }
@@ -144,11 +152,26 @@ export class TurmaPeriodoComponent implements OnInit {
                  const disciplinaTurma = this.getDiciplinaTurma();
                  this.removeVagos(periodoSabado);
                  periodoSabado.disciplinaTurma = disciplinaTurma;
+                 disciplinaSalvas.push(disciplinaTurma);
               }
           }
         }
     }
+    this.adicionarDisciplina(disciplinaSalvas);
     this.fecharPopUp();
+  }
+
+
+  adicionarDisciplina(disciplinaSalvas: any) {
+    this.turmaService.salvarDisciplina(disciplinaSalvas)
+      .then(obj => {
+        if (disciplinaSalvas.length > 1) {
+          this.messageService.addSucesso('Disciplinas adicionadas com sucesso!');
+        } else {
+          this.messageService.addSucesso('Disciplina adicionadas com sucesso!');
+        }
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   limparPopUp() {

@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
-import { Turma } from './../core/model';
+import { Turma, DisciplinaTurma } from './../core/model';
 
 export class TurmaFiltro {
   nome: string;
@@ -20,7 +20,7 @@ export class TurmaFiltro {
 export class TurmaService {
 
   turmaUrl: string;
-  disciplinaUrl : string;
+  disciplinaUrl: string;
 
   constructor(private http: GescolarHttp) {
     this.turmaUrl = `${environment.apiUrl}/turmas`;
@@ -94,6 +94,12 @@ export class TurmaService {
 
    listarDisciplinas(): Promise<any> {
     return this.http.get<any>(`${this.disciplinaUrl}`)
+      .toPromise();
+  }
+
+
+  salvarDisciplina(disciplina: any): Promise<any> {
+    return this.http.post<any>(`${this.turmaUrl}/salvarDisciplina`, disciplina)
       .toPromise();
   }
 
