@@ -90,6 +90,7 @@ import {DataViewModule} from 'primeng/dataview';
 import {CardModule} from 'primeng/card';
 import { ProfessorService } from '../professores/professor.service';
 import { CoreModule } from '../core/core.module';
+import { TurmaAlunosComponent } from './turma-alunos/turma-alunos.component';
 
 
 @NgModule({
@@ -184,6 +185,6 @@ import { CoreModule } from '../core/core.module';
     CpfCnpjModule
 
   ],
-  declarations: [TurmaCadastroComponent, TurmaPesquisaComponent, TurmaPeriodoComponent]
+  declarations: [TurmaCadastroComponent, TurmaPesquisaComponent, TurmaPeriodoComponent, TurmaAlunosComponent]
 })
 export class TurmaModule { }
