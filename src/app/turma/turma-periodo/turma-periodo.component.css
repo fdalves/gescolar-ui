@@ -1,11 +1,10 @@
-::ng-deep .ui-dialog {
-  width: 70% !important;
-  height: 80% !important;
-}
 
-::ng-deep p-dialog .ui-dialog {
+
+::ng-deep p-dialog .ui-dialog-periodo {
   overflow: scroll;
   max-height: 80%;
+  width: 70% !important;
+  height: 80% !important;
 }
 
 

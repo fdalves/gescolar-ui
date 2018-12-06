@@ -103,4 +103,11 @@ export class TurmaService {
       .toPromise();
   }
 
+
+  excluirDisciplina(codigo: number): Promise<void> {
+    return this.http.delete(`${this.turmaUrl}/deleteDisciplina/${codigo}`)
+      .toPromise()
+      .then(() => null);
+  }
+
 }
