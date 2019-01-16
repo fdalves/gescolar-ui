@@ -1,3 +1,59 @@
-<p>
-  turma-alunos works!
-</p>
+<div class="ui-fluid">
+  <div class="no-margin">
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-md-7">
+            <div class="ui-inputgroup">
+              <span class="md-inputfield">
+                <input type="text" pInputText [(ngModel)]="filtro.nome" name="nome">
+                <label>Pesquisar alunos da turma por nome</label>
+              </span>
+              <button pButton type="submit" icon="ui-icon-search"></button>
+            </div>
+          </div>
+
+
+          <div class="ui-g-12 ui-md-7">
+            <div class="ui-inputgroup">
+              <span class="md-inputfield">
+                <input type="text" pInputText [(ngModel)]="filtro.matricula" name="matricula">
+                <label>Pesquisar alunos na turma por matrícula</label>
+              </span>
+              <button pButton type="submit" icon="ui-icon-search"></button>
+            </div>
+          </div>
+
+          <div class="ui-g-12">
+
+            <p-table [value]="alunos" [responsive]="true" [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)"
+              [paginator]="true" [rows]="filtro.itensPorPagina">
+
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width:9em; text-align: center">Foto</th>
+                  <th>Nome</th>
+                  <th>Matricula</th>
+                  <th>Turma</th>
+                </tr>
+              </ng-template>
+
+
+              <ng-template pTemplate="body" let-aluno>
+                <tr>
+                  <td style="width:9em; text-align: center">
+                    <img src="{{aluno.urlFoto}}" style="border-radius: 50%;" height="42" width="42" class="circular-image"  />
+                  </td>
+                  <td>{{aluno.nome}}</td>
+                  <td>{{aluno.matricula}}</td>
+                  <td>{{aluno.turma.nome}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+
+        </div>
+    </form>
+  </div>
+</div>
+

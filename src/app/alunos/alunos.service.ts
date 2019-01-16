@@ -104,4 +104,42 @@ export class AlunosService {
       .then(response => response);
   }
 
+
+
+  pesquisarPorTurma(filtro: AlunoFiltro, codigoTurma: number): Promise<any> {
+    let params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
+
+    if (filtro.nome) {
+      params = params.append('nome', filtro.nome);
+    }
+
+    if (filtro.matricula) {
+      params = params.append('matricula', filtro.matricula);
+    }
+
+    return this.http.get<any>(`${this.alunoUrl}/pesquisarPorTurma/${codigoTurma}`, { params })
+      .toPromise()
+      .then(response => {
+        const alunos = response.content;
+
+        for (const aluno of alunos) {
+          if (aluno.urlFoto === null) {
+            aluno.urlFoto = environment.fotoAlunoDefault;
+          }
+      }
+
+        const resultado = {
+          alunos,
+          total: response.totalElements
+        };
+
+        return resultado;
+      });
+  }
+
 }
