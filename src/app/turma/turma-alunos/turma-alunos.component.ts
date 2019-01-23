@@ -32,12 +32,12 @@ export class TurmaAlunosComponent implements OnInit {
     this.filtro.pagina = pagina;
 
     if (this.codigoTurma) {
-    this.alunosService.pesquisarPorTurma(this.filtro, this.codigoTurma)
-      .then(resultado => {
-        this.totalRegistros = resultado.total;
-        this.alunos = resultado.alunos;
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+      this.alunosService.pesquisarPorTurma(this.filtro, this.codigoTurma)
+        .then(resultado => {
+          this.totalRegistros = resultado.total;
+          this.alunos = resultado.alunos;
+        })
+        .catch(erro => this.errorHandler.handle(erro));
     }
   }
 

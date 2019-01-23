@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { GrowMessageService } from './../../shared/grow-message.service';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/components/common/api';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -17,13 +18,16 @@ export class TurmaPesquisaComponent implements OnInit {
   turmas = [];
   @ViewChild('tabela') grid;
 
-  constructor(private title: Title,
+  constructor(
+    private authService: AuthService,
+    private title: Title,
     private turmaService: TurmaService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
     private messageService: GrowMessageService) { }
 
   ngOnInit() {
+    console.log(this.authService.jwtPayload);
     this.title.setTitle('Pesquisa de Trumas');
   }
 
