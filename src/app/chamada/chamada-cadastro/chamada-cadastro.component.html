@@ -1,0 +1,32 @@
+<div class="ui-fluid">
+    <div class="no-margin">
+      <h1>Chamada</h1>
+    </div>
+    <div class="card no-margin">
+
+    <form autocomplete="off">
+        <div class="ui-g form-group">
+
+            <div class="ui-g-12 ui-md-7">
+                <p-dropdown placeholder="Selecione Professor" [filter]="true" [autoWidth]="false" ></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-7">
+                <p-dropdown placeholder="Selecione Turma" [filter]="true" [autoWidth]="false" ></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-7">
+              <p-calendar [(ngModel)]="value" placeholder="Selecione a Data" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-7">
+               <p-multiSelect [options]="cars"  [panelStyle]="{minWidth:'12em'}" defaultLabel="Selecione Periodos" ></p-multiSelect>
+            </div>
+        </div>
+
+
+
+     </form>
+
+    </div>
+</div>

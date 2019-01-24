@@ -32,6 +32,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
                 {label: 'Professores', icon: 'desktop_mac', routerLink: ['/professores']},
                 {label: 'Alunos', icon: 'desktop_mac', routerLink: ['/alunos']},
                 {label: 'Turmas', icon: 'desktop_mac', routerLink: ['/turmas']},
+                {label: 'Chamada', icon: 'desktop_mac', routerLink: ['/chamada/nova']},
             ]
         },
 
