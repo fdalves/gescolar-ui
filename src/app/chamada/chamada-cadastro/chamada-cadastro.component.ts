@@ -1,3 +1,7 @@
+import { FormControl } from '@angular/forms';
+import { ErrorHandlerService } from './../../core/error-handler.service';
+import { ProfessorService } from './../../professores/professor.service';
+import { AuthService } from './../../seguranca/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChamadaCadastroComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService,
+     private professorService: ProfessorService,
+     private errorHandler: ErrorHandlerService) { }
 
   value: Date;
   pt: any;
+  disableProf = false;
+  professores: any;
+  professorSelecionado: any;
 
   ngOnInit() {
+
+    console.log(this.authService.jwtPayload);
+    this.carregaProf();
+
+    if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'PROFESSOR') {
+      console.log('entoru...');
+      this.disableProf = true;
+      this.professorSelecionado = this.authService.jwtPayload.codigoProfessor;
+    }
+
     this.pt = {
       firstDayOfWeek: 0,
       dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -25,5 +44,17 @@ export class ChamadaCadastroComponent implements OnInit {
       clear: 'Limpar'
     };
   }
+
+  carregaProf(): any {
+    return this.professorService.listarTodas()
+    .then(profs => {
+      this.professores = profs
+        .map(p => ({ label: p.nome, value: p.codigo }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+
+  }
+
+  salvar(form: FormControl) {}
 
 }
