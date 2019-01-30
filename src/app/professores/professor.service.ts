@@ -27,7 +27,6 @@ export class ProfessorService {
   }
 
   pesquisar(filtro: ProfessorFiltro): Promise<any> {
-
     let params = new HttpParams({
       fromObject: {
         page: filtro.pagina.toString(),

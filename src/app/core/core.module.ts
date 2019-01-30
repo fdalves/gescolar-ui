@@ -1,3 +1,4 @@
+import { ChamadaService } from './../chamada/chamada.service';
 import { HttpClientModule } from '@angular/common/http';
 import { GescolarHttp } from './../seguranca/gescolar-http';
 import { TurmaService } from './../turma/turma.service';
@@ -52,6 +53,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
     ProfessorService,
     AlunosService,
     TurmaService,
+    ChamadaService,
     ResponsavelService,
     GrowMessageService,
     JwtHelperService ,

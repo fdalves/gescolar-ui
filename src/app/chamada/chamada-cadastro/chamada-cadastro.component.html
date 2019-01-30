@@ -8,18 +8,16 @@
         <div class="ui-g form-group">
 
             <div class="ui-g-12 ui-md-7" [hidden]="disableProf">
-                <p-dropdown placeholder="Selecione Professor" [options]="professores" [filter]="true" [disabled]="disableProf" [autoWidth]="false" [(ngModel)]="professorSelecionado" name="professorSelecionado"  disable ></p-dropdown>
+                <p-dropdown placeholder="Selecione Professor" (onChange)="carregarTurmaDisciplina()" [options]="professores" [filter]="true" [disabled]="disableProf" [autoWidth]="false" [(ngModel)]="professorSelecionado" name="professorSelecionado"   ></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-md-7">
-                <p-dropdown placeholder="Selecione Turma" [filter]="true" [autoWidth]="false" ></p-dropdown>
+                <p-dropdown placeholder="Selecione Turma/Disciplina" [filter]="true" [autoWidth]="false" [options]="turmaDisciplinas" [(ngModel)]="turmaDisciplinaSelecionada" name="turmaDisciplinaSelecionada" ></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-md-7">
-              <p-calendar [(ngModel)]="value" placeholder="Selecione a Data" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
+              <p-calendar [(ngModel)]="value" (onSelect)="carregarPeriodos()" placeholder="Selecione a Data" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
             </div>
-
-            {{professorSelecionado}}
 
             <div class="ui-g-12 ui-md-7">
                <p-multiSelect [options]="cars"  [panelStyle]="{minWidth:'12em'}" defaultLabel="Selecione Periodos" ></p-multiSelect>

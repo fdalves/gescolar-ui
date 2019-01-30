@@ -1,3 +1,4 @@
+import { ChamadaService } from './../chamada.service';
 import { FormControl } from '@angular/forms';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ProfessorService } from './../../professores/professor.service';
@@ -13,13 +14,17 @@ export class ChamadaCadastroComponent implements OnInit {
 
   constructor(private authService: AuthService,
      private professorService: ProfessorService,
-     private errorHandler: ErrorHandlerService) { }
+     private errorHandler: ErrorHandlerService,
+     private chamadaService: ChamadaService) { }
 
   value: Date;
   pt: any;
   disableProf = false;
   professores: any;
   professorSelecionado: any;
+  turmaDisciplinas: any;
+  turmaDisciplinaSelecionada: any;
+  periodos: any;
 
   ngOnInit() {
 
@@ -52,7 +57,33 @@ export class ChamadaCadastroComponent implements OnInit {
         .map(p => ({ label: p.nome, value: p.codigo }));
     })
     .catch(erro => this.errorHandler.handle(erro));
+  }
 
+  carregarTurmaDisciplina(): any {
+
+    console.log('entrou1..');
+    return this.chamadaService.getTurmasProfessor(this.professorSelecionado)
+    .then(turmaDisciplinas => {
+      console.log('entrou12..');
+      console.log(turmaDisciplinas);
+      this.turmaDisciplinas = turmaDisciplinas
+        .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
+
+
+  carregarPeriodos(): any {
+
+    console.log('entrou1..');
+    return this.chamadaService.getPeriodos(this.value, this.turmaDisciplinaSelecionada)
+    .then(periodos => {
+      console.log('entrou12..');
+      console.log(periodos);
+      this.periodos = periodos
+        .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar(form: FormControl) {}
