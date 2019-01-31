@@ -12,11 +12,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChamadaCadastroComponent implements OnInit {
 
-  constructor(private authService: AuthService,
-     private professorService: ProfessorService,
-     private errorHandler: ErrorHandlerService,
-     private chamadaService: ChamadaService) { }
-
   value: Date;
   pt: any;
   disableProf = false;
@@ -25,6 +20,14 @@ export class ChamadaCadastroComponent implements OnInit {
   turmaDisciplinas: any;
   turmaDisciplinaSelecionada: any;
   periodos: any;
+  periodosSelecionados: any;
+
+
+  constructor(private authService: AuthService,
+     private professorService: ProfessorService,
+     private errorHandler: ErrorHandlerService,
+     private chamadaService: ChamadaService) { }
+
 
   ngOnInit() {
 
@@ -75,13 +78,10 @@ export class ChamadaCadastroComponent implements OnInit {
 
   carregarPeriodos(): any {
 
-    console.log('entrou1..');
     return this.chamadaService.getPeriodos(this.value, this.turmaDisciplinaSelecionada)
     .then(periodos => {
-      console.log('entrou12..');
-      console.log(periodos);
       this.periodos = periodos
-        .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
+        .map(p => ({ label: p.periodo, value: p.codigo }));
     })
     .catch(erro => this.errorHandler.handle(erro));
   }

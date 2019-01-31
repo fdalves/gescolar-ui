@@ -20,7 +20,7 @@
             </div>
 
             <div class="ui-g-12 ui-md-7">
-               <p-multiSelect [options]="cars"  [panelStyle]="{minWidth:'12em'}" defaultLabel="Selecione Periodos" ></p-multiSelect>
+               <p-multiSelect [options]="periodos" [(ngModel)]="periodosSelecionados" name="periodosSelecionados"   defaultLabel="Selecione Periodos" ></p-multiSelect>
             </div>
         </div>
 
