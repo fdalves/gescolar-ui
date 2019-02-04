@@ -30,6 +30,11 @@ export class ChamadaService {
       .toPromise();
   }
 
+  getAlunos(codigo: number): Promise<any> {
+    return this.http.get<any>(`${this.chamadaUrl}/getAlunos/${codigo}`)
+      .toPromise();
+  }
+
   getPeriodos(date: Date, codigoTurmaDisciplina: number): Promise<any> {
     const chamada = new ChamadaFiltro();
     chamada.codigoTurmaDiciplina = codigoTurmaDisciplina;

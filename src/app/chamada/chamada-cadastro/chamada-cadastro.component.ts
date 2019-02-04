@@ -1,3 +1,5 @@
+import { environment } from './../../../environments/environment';
+import { Aluno } from './../../core/model';
 import { ChamadaService } from './../chamada.service';
 import { FormControl } from '@angular/forms';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -21,6 +23,7 @@ export class ChamadaCadastroComponent implements OnInit {
   turmaDisciplinaSelecionada: any;
   periodos: any;
   periodosSelecionados: any;
+  alunos: Array<Aluno> = [];
 
 
   constructor(private authService: AuthService,
@@ -82,9 +85,29 @@ export class ChamadaCadastroComponent implements OnInit {
     .then(periodos => {
       this.periodos = periodos
         .map(p => ({ label: p.periodo, value: p.codigo }));
-    })
+     })
     .catch(erro => this.errorHandler.handle(erro));
   }
+
+  carregarAlunos(): any {
+
+    if (this.alunos.length === 0) {
+      return this.chamadaService.getAlunos(this.turmaDisciplinaSelecionada)
+    .then(alunos => {
+      this.alunos = alunos;
+
+      for (const aluno of alunos) {
+        if (aluno.urlFoto === null) {
+          aluno.urlFoto = environment.fotoAlunoDefault;
+        }
+    }
+
+     })
+    .catch(erro => this.errorHandler.handle(erro));
+    }
+  }
+
+
 
   salvar(form: FormControl) {}
 
