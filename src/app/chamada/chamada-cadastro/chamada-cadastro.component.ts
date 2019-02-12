@@ -66,15 +66,18 @@ export class ChamadaCadastroComponent implements OnInit {
   }
 
   carregarTurmaDisciplina(): any {
-
-    console.log('entrou1..');
     return this.chamadaService.getTurmasProfessor(this.professorSelecionado)
       .then(turmaDisciplinas => {
-        console.log('entrou12..');
-        console.log(turmaDisciplinas);
+        this.turmaDisciplinaSelecionada = null;
+        this.value = null;
+        this.periodosSelecionados = null;
+        this.alunos = [];
+        this.alunosPresentes = null;
+        
         this.turmaDisciplinas = turmaDisciplinas
-          .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
-      })
+        .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
+      }
+    )
       .catch(erro => this.errorHandler.handle(erro));
   }
 
@@ -83,6 +86,10 @@ export class ChamadaCadastroComponent implements OnInit {
 
     return this.chamadaService.getPeriodos(this.value, this.turmaDisciplinaSelecionada)
       .then(periodos => {
+        this.periodosSelecionados = null;
+        this.alunos = [];
+        this.alunosPresentes = null;
+
         this.periodos = periodos
           .map(p => ({ label: p.periodo, value: p.codigo }));
       })
@@ -107,7 +114,12 @@ export class ChamadaCadastroComponent implements OnInit {
     }
   }
 
-
+  onChangeTurma(){
+    this.value = null;
+    this.periodosSelecionados = null;
+    this.alunos = [];
+    this.alunosPresentes = null;
+  }
 
   salvar(form: FormControl) {
     const chamada = new Chamada();
