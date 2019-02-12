@@ -27,7 +27,6 @@ export class TurmaPesquisaComponent implements OnInit {
     private messageService: GrowMessageService) { }
 
   ngOnInit() {
-    console.log(this.authService.jwtPayload);
     this.title.setTitle('Pesquisa de Trumas');
   }
 

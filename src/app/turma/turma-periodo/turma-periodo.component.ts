@@ -48,7 +48,6 @@ export class TurmaPeriodoComponent implements OnInit {
       this.initProfessores();
     }
 
-    console.log(this.periodos);
   }
 
 

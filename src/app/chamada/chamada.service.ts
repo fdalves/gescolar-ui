@@ -40,7 +40,6 @@ export class ChamadaService {
     const chamada = new ChamadaFiltro();
     chamada.codigoTurmaDiciplina = codigoTurmaDisciplina;
     chamada.data = date;
-    console.log(chamada);
     return this.http.post<any>(`${this.chamadaUrl}/getPeriodos`, chamada)
       .toPromise();
   }
