@@ -33,8 +33,7 @@
                   <tr>
                     <th style="width:9em; text-align: center">Foto</th>
                     <th>Nome</th>
-                    <th>Matricula</th>
-                    <th>Turma</th>
+                    <th>Presenca</th>
                     </tr>
                 </ng-template>
 
@@ -45,14 +44,13 @@
                       <img src="{{aluno.urlFoto}}" style="border-radius: 50%;" height="42" width="42" class="circular-image"  />
                     </td>
                     <td>{{aluno.nome}}</td>
-                    <td>{{aluno.matricula}}</td>
-                    <td>{{aluno.turma.nome}}</td>
-                   </tr>
+                    <td><p-checkbox name="groupname" value="{{aluno.codigo}}" [(ngModel)]="alunosPresentes"></p-checkbox></td>
+                    </tr>
                 </ng-template>
               </p-table>
             </div>
 
-
+            {{alunosPresentes}}
 
         </div>
 
