@@ -1,3 +1,10 @@
+export class Chamada {
+  periodosSelecionados: any;
+  alunosPresentes: any;
+  dateChamada: Date;
+}
+
+
 
 export class Endereco {
   logradouro: string;

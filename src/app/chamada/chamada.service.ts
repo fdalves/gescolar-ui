@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from '../../environments/environment';
+import { Chamada } from '../core/model';
 
 
 export class ChamadaFiltro {
@@ -41,6 +42,12 @@ export class ChamadaService {
     chamada.data = date;
     console.log(chamada);
     return this.http.post<any>(`${this.chamadaUrl}/getPeriodos`, chamada)
+      .toPromise();
+  }
+
+
+  chamada(chamada: Chamada): Promise<any> {
+    return this.http.post<any>(`${this.chamadaUrl}`, chamada)
       .toPromise();
   }
 

@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { Aluno } from './../../core/model';
+import { Aluno, Chamada } from './../../core/model';
 import { ChamadaService } from './../chamada.service';
 import { FormControl } from '@angular/forms';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -27,9 +27,9 @@ export class ChamadaCadastroComponent implements OnInit {
   alunosPresentes: any;
 
   constructor(private authService: AuthService,
-     private professorService: ProfessorService,
-     private errorHandler: ErrorHandlerService,
-     private chamadaService: ChamadaService) { }
+    private professorService: ProfessorService,
+    private errorHandler: ErrorHandlerService,
+    private chamadaService: ChamadaService) { }
 
 
   ngOnInit() {
@@ -58,57 +58,68 @@ export class ChamadaCadastroComponent implements OnInit {
 
   carregaProf(): any {
     return this.professorService.listarTodas()
-    .then(profs => {
-      this.professores = profs
-        .map(p => ({ label: p.nome, value: p.codigo }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+      .then(profs => {
+        this.professores = profs
+          .map(p => ({ label: p.nome, value: p.codigo }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarTurmaDisciplina(): any {
 
     console.log('entrou1..');
     return this.chamadaService.getTurmasProfessor(this.professorSelecionado)
-    .then(turmaDisciplinas => {
-      console.log('entrou12..');
-      console.log(turmaDisciplinas);
-      this.turmaDisciplinas = turmaDisciplinas
-        .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+      .then(turmaDisciplinas => {
+        console.log('entrou12..');
+        console.log(turmaDisciplinas);
+        this.turmaDisciplinas = turmaDisciplinas
+          .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 
   carregarPeriodos(): any {
 
     return this.chamadaService.getPeriodos(this.value, this.turmaDisciplinaSelecionada)
-    .then(periodos => {
-      this.periodos = periodos
-        .map(p => ({ label: p.periodo, value: p.codigo }));
-     })
-    .catch(erro => this.errorHandler.handle(erro));
+      .then(periodos => {
+        this.periodos = periodos
+          .map(p => ({ label: p.periodo, value: p.codigo }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarAlunos(): any {
 
     if (this.alunos.length === 0) {
       return this.chamadaService.getAlunos(this.turmaDisciplinaSelecionada)
-    .then(alunos => {
-      this.alunos = alunos;
+        .then(alunos => {
+          this.alunos = alunos;
 
-      for (const aluno of alunos) {
-        if (aluno.urlFoto === null) {
-          aluno.urlFoto = environment.fotoAlunoDefault;
-        }
-    }
+          for (const aluno of alunos) {
+            if (aluno.urlFoto === null) {
+              aluno.urlFoto = environment.fotoAlunoDefault;
+            }
+          }
 
-     })
-    .catch(erro => this.errorHandler.handle(erro));
+        })
+        .catch(erro => this.errorHandler.handle(erro));
     }
   }
 
 
 
-  salvar(form: FormControl) {}
+  salvar(form: FormControl) {
+    const chamada = new Chamada();
+    chamada.alunosPresentes = this.alunosPresentes;
+    chamada.periodosSelecionados= this.periodosSelecionados;
+    chamada.dateChamada = this.value;
+    console.log('entrou...');
+    console.log(chamada);
+    this.chamadaService.chamada(chamada)
+        .then(alunos => {
+          
+        }).catch(erro => this.errorHandler.handle(erro));
+  }
 
 }
