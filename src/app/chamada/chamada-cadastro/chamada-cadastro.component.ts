@@ -34,11 +34,9 @@ export class ChamadaCadastroComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.authService.jwtPayload);
     this.carregaProf();
 
     if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'PROFESSOR') {
-      console.log('entoru...');
       this.disableProf = true;
       this.professorSelecionado = this.authService.jwtPayload.codigoProfessor;
     }
@@ -126,8 +124,6 @@ export class ChamadaCadastroComponent implements OnInit {
     chamada.alunosPresentes = this.alunosPresentes;
     chamada.periodosSelecionados= this.periodosSelecionados;
     chamada.dateChamada = this.value;
-    console.log('entrou...');
-    console.log(chamada);
     this.chamadaService.chamada(chamada)
         .then(alunos => {
           
