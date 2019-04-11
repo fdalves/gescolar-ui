@@ -3,9 +3,8 @@ import {Component, OnDestroy, Renderer, OnInit, NgZone} from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
+  templateUrl: './app.component.html'
+  })
 export class AppComponent implements OnDestroy, OnInit {
 
     menuClick: boolean;
