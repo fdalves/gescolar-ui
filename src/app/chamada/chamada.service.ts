@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from '../../environments/environment';
-import { Chamada } from '../core/model';
+import { Chamada, ChamadaPesquisa } from '../core/model';
 
 
 export class ChamadaFiltro {
@@ -50,5 +50,9 @@ export class ChamadaService {
       .toPromise();
   }
 
+  pesquisaChamada(chamada: ChamadaPesquisa): Promise<any> {
+    return this.http.post<any>(`${this.chamadaUrl}/pesquisa`, chamada)
+      .toPromise();
+  }
 
 }

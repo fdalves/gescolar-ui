@@ -25,6 +25,7 @@ export class ChamadaCadastroComponent implements OnInit {
   periodosSelecionados: any;
   alunos: Array<Aluno> = [];
   alunosPresentes: any;
+  
 
   constructor(private authService: AuthService,
     private professorService: ProfessorService,

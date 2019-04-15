@@ -4,7 +4,12 @@ export class Chamada {
   dateChamada: Date;
 }
 
-
+export class ChamadaPesquisa {
+  codigoProfessor: any;
+  codigoDisciplinaTurma: any;
+  dataIni: Date;
+  dataFim: Date;
+}
 
 export class Endereco {
   logradouro: string;
