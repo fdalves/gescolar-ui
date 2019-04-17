@@ -55,4 +55,10 @@ export class ChamadaService {
       .toPromise();
   }
 
+  buscarPorCodigo(codigo: number): Promise<any> {
+    return this.http.get<any>(`${this.chamadaUrl}/${codigo}`)
+      .toPromise()
+      .then(response => response);
+  }
+
 }

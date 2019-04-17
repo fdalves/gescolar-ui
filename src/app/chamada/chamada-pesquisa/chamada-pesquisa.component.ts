@@ -13,14 +13,15 @@ import { FormControl } from '../../../../node_modules/@angular/forms';
 })
 export class ChamadaPesquisaComponent implements OnInit {
 
-  value: Date = new Date();;
-  value2: Date = new Date();;
+  value: Date = new Date();
+  value2: Date = new Date();
   pt: any;
   professores: any;
   professorSelecionado: any;
   disableProf = false;
   turmaDisciplinas: any;
   turmaDisciplinaSelecionada: any;
+  chamadas = []; 
   
 
   constructor(private authService: AuthService,
@@ -80,8 +81,8 @@ export class ChamadaPesquisaComponent implements OnInit {
     chamada.dataIni = this.value;
     chamada.dataFim = this.value2;
     this.chamadaService.pesquisaChamada(chamada)
-        .then(alunos => {
-          
+        .then(chamadas => {
+          this.chamadas =  chamadas;
         }).catch(erro => this.errorHandler.handle(erro));
   }
 

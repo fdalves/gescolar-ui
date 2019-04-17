@@ -6,6 +6,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ProfessorService } from './../../professores/professor.service';
 import { AuthService } from './../../seguranca/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-chamada-cadastro',
@@ -13,8 +14,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chamada-cadastro.component.css']
 })
 export class ChamadaCadastroComponent implements OnInit {
-
-  value: Date;
+  
+  value: Date = new Date();
   pt: any;
   disableProf = false;
   professores: any;
@@ -25,12 +26,16 @@ export class ChamadaCadastroComponent implements OnInit {
   periodosSelecionados: any;
   alunos: Array<Aluno> = [];
   alunosPresentes: any;
+  codigo: any;
+  edicao = false;
+  chamada : any;
   
 
   constructor(private authService: AuthService,
     private professorService: ProfessorService,
     private errorHandler: ErrorHandlerService,
-    private chamadaService: ChamadaService) { }
+    private chamadaService: ChamadaService,
+    private route: ActivatedRoute,) { }
 
 
   ngOnInit() {
@@ -41,6 +46,16 @@ export class ChamadaCadastroComponent implements OnInit {
       this.disableProf = true;
       this.professorSelecionado = this.authService.jwtPayload.codigoProfessor;
     }
+
+    const codigoChamda = this.route.snapshot.params['codigo'];
+    this.codigo = codigoChamda;
+
+    if (codigoChamda) {
+      this.edicao = true;
+      this.carregarChamada(codigoChamda);
+      
+    }
+
 
     this.pt = {
       firstDayOfWeek: 0,
@@ -55,6 +70,19 @@ export class ChamadaCadastroComponent implements OnInit {
     };
   }
 
+
+  carregarChamada(codigo: any): any {
+    return this.chamadaService.buscarPorCodigo(codigo)
+      .then(chamada => {
+        this.chamada = chamada;
+
+        
+        this.professorSelecionado = this.chamada.turmaPeriodo.disciplinaTurma.professor.codigo;
+        this.carregarTurmaDisciplina();
+       
+       }).catch(erro => this.errorHandler.handle(erro));
+    }
+
   carregaProf(): any {
     return this.professorService.listarTodas()
       .then(profs => {
@@ -67,13 +95,24 @@ export class ChamadaCadastroComponent implements OnInit {
   carregarTurmaDisciplina(): any {
     return this.chamadaService.getTurmasProfessor(this.professorSelecionado)
       .then(turmaDisciplinas => {
-        this.turmaDisciplinaSelecionada = null;
-        this.value = null;
-        this.periodosSelecionados = null;
-        this.alunos = [];
-        this.alunosPresentes = null;
+      
+        if (this.chamada){
+          this.turmaDisciplinaSelecionada =  this.chamada.turmaPeriodo.disciplinaTurma.codigo;
+          let newDt = new Date(this.chamada.dataChamada);
+          console.log(this.value);
+          this.value = newDt;
+          console.log(this.value);
+          this.carregarPeriodos();
+        } else {
+          this.turmaDisciplinaSelecionada = null;
+          this.value = null;
+          this.periodosSelecionados = null;
+          this.alunos = [];
+          this.alunosPresentes = null;
+        }
         
-        this.turmaDisciplinas = turmaDisciplinas
+
+        this.turmaDisciplinas = turmaDisciplinas        
         .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
       }
     )
@@ -85,12 +124,23 @@ export class ChamadaCadastroComponent implements OnInit {
 
     return this.chamadaService.getPeriodos(this.value, this.turmaDisciplinaSelecionada)
       .then(periodos => {
-        this.periodosSelecionados = null;
-        this.alunos = [];
-        this.alunosPresentes = null;
+
 
         this.periodos = periodos
-          .map(p => ({ label: p.periodo, value: p.codigo }));
+        .map(p => ({ label: p.periodo, value: p.codigo }));
+
+        if (this.chamada) {
+          console.log(this.chamada.turmaPeriodo.codigo);
+          let myArr1: number[] = [this.chamada.turmaPeriodo.codigo];
+          this.periodosSelecionados = myArr1;
+        } else {
+          this.periodosSelecionados = null;
+          this.alunos = [];
+          this.alunosPresentes = null;
+         
+        }
+
+        
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
