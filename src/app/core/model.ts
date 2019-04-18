@@ -79,6 +79,7 @@ export class Aluno {
   matricula: string;
   turma: Turma;
   urlFoto: string;
+  chamada: boolean;
   responsaveis: Responsavel[];
 }
 

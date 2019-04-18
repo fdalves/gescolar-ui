@@ -8,19 +8,19 @@
         <div class="ui-g form-group">
 
             <div class="ui-g-12 ui-md-7" [hidden]="disableProf">
-                <p-dropdown placeholder="Selecione Professor" required (onChange)="carregarTurmaDisciplina()" [options]="professores" [filter]="true" [disabled]="disableProf" [autoWidth]="false" [(ngModel)]="professorSelecionado" name="professorSelecionado"   ></p-dropdown>
+                <p-dropdown [disabled]="edicao" placeholder="Selecione Professor" required (onChange)="carregarTurmaDisciplina()" [options]="professores" [filter]="true" [disabled]="disableProf" [autoWidth]="false" [(ngModel)]="professorSelecionado" name="professorSelecionado"   ></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-md-7">
-                <p-dropdown placeholder="Selecione Turma/Disciplina" required  (onChange)="onChangeTurma()" [filter]="true" [autoWidth]="false" [options]="turmaDisciplinas" [(ngModel)]="turmaDisciplinaSelecionada" name="turmaDisciplinaSelecionada" ></p-dropdown>
+                <p-dropdown [disabled]="edicao" placeholder="Selecione Turma/Disciplina" required  (onChange)="onChangeTurma()" [filter]="true" [autoWidth]="false" [options]="turmaDisciplinas" [(ngModel)]="turmaDisciplinaSelecionada" name="turmaDisciplinaSelecionada" ></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-md-7">
-              <p-calendar [(ngModel)]="value" (onSelect)="carregarPeriodos()" required  placeholder="Selecione a Data" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
+              <p-calendar [disabled]="edicao" [(ngModel)]="value" (onSelect)="carregarPeriodos()" required  placeholder="Selecione a Data" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
             </div>
 
             <div class="ui-g-12 ui-md-7">
-               <p-multiSelect [options]="periodos"  required (onChange)="carregarAlunos()" [(ngModel)]="periodosSelecionados" name="periodosSelecionados"   defaultLabel="Selecione Periodos" ></p-multiSelect>
+               <p-multiSelect [disabled]="edicao" [options]="periodos"  required (onChange)="carregarAlunos()" [(ngModel)]="periodosSelecionados" name="periodosSelecionados"   defaultLabel="Selecione Periodos" ></p-multiSelect>
             </div>
 
 
@@ -43,14 +43,12 @@
                     <td style="width:9em; text-align: center">
                       <img src="{{aluno.urlFoto}}" style="border-radius: 50%;" height="42" width="42" class="circular-image"  />
                     </td>
-                    <td>{{aluno.nome}}</td>
-                    <td style="width:9em; text-align: center"><p-checkbox name="groupname" value="{{aluno.codigo}}" [(ngModel)]="alunosPresentes"></p-checkbox></td>
+                    <td>{{aluno.nome}} {{aluno.codigo}}</td>
+                    <td style="width:9em; text-align: center"><p-checkbox name="groupname"  value="{{aluno.codigo}}" [(ngModel)]="alunosPresentes" inputId="{{aluno.codigo}}" ></p-checkbox></td>
                     </tr>
                 </ng-template>
               </p-table>
             </div>
-
-            {{alunosPresentes}}
 
         </div>
 
@@ -62,7 +60,7 @@
             <button pButton type="button" label="Novo" (click)="novo()" icon="fa ui-icon-add-circle"></button>
           </div>
           <div class="ui-g-12 ui-md-3">
-            <button pButton type="button" icon="fa ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/professores">
+            <button pButton type="button" icon="fa ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/chamada">
             </button>
           </div>
         </div>

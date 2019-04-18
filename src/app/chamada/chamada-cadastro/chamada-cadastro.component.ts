@@ -1,12 +1,14 @@
 import { environment } from './../../../environments/environment';
 import { Aluno, Chamada } from './../../core/model';
 import { ChamadaService } from './../chamada.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ProfessorService } from './../../professores/professor.service';
 import { AuthService } from './../../seguranca/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
+import { GrowMessageService } from '../../shared/grow-message.service';
+import { Title } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-chamada-cadastro',
@@ -14,7 +16,7 @@ import { ActivatedRoute } from '../../../../node_modules/@angular/router';
   styleUrls: ['./chamada-cadastro.component.css']
 })
 export class ChamadaCadastroComponent implements OnInit {
-  
+ 
   value: Date = new Date();
   pt: any;
   disableProf = false;
@@ -35,7 +37,10 @@ export class ChamadaCadastroComponent implements OnInit {
     private professorService: ProfessorService,
     private errorHandler: ErrorHandlerService,
     private chamadaService: ChamadaService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private title: Title,
+    private messageService: GrowMessageService,) { }
 
 
   ngOnInit() {
@@ -53,7 +58,6 @@ export class ChamadaCadastroComponent implements OnInit {
     if (codigoChamda) {
       this.edicao = true;
       this.carregarChamada(codigoChamda);
-      
     }
 
 
@@ -75,13 +79,32 @@ export class ChamadaCadastroComponent implements OnInit {
     return this.chamadaService.buscarPorCodigo(codigo)
       .then(chamada => {
         this.chamada = chamada;
-
-        
         this.professorSelecionado = this.chamada.turmaPeriodo.disciplinaTurma.professor.codigo;
         this.carregarTurmaDisciplina();
-       
+        this.carregaChamadaAlunos();
+
        }).catch(erro => this.errorHandler.handle(erro));
     }
+
+
+    carregaChamadaAlunos(): any {
+      return this.chamadaService.buscarChamadaAlunos(this.chamada)
+      .then(alunos => {
+          this.alunos = alunos;
+          this.alunosPresentes = [];
+
+          for (const aluno of this.alunos) {
+            if (aluno.urlFoto === null) {
+                aluno.urlFoto = environment.fotoAlunoDefault;
+            }
+            if (aluno.chamada) {
+              this.alunosPresentes.push(String(aluno.codigo));
+            }
+          }
+      }
+    ).catch(erro => this.errorHandler.handle(erro));
+  }
+
 
   carregaProf(): any {
     return this.professorService.listarTodas()
@@ -98,10 +121,10 @@ export class ChamadaCadastroComponent implements OnInit {
       
         if (this.chamada){
           this.turmaDisciplinaSelecionada =  this.chamada.turmaPeriodo.disciplinaTurma.codigo;
+          
           let newDt = new Date(this.chamada.dataChamada);
-          console.log(this.value);
           this.value = newDt;
-          console.log(this.value);
+         
           this.carregarPeriodos();
         } else {
           this.turmaDisciplinaSelecionada = null;
@@ -122,6 +145,8 @@ export class ChamadaCadastroComponent implements OnInit {
 
   carregarPeriodos(): any {
 
+   
+
     return this.chamadaService.getPeriodos(this.value, this.turmaDisciplinaSelecionada)
       .then(periodos => {
 
@@ -130,14 +155,12 @@ export class ChamadaCadastroComponent implements OnInit {
         .map(p => ({ label: p.periodo, value: p.codigo }));
 
         if (this.chamada) {
-          console.log(this.chamada.turmaPeriodo.codigo);
           let myArr1: number[] = [this.chamada.turmaPeriodo.codigo];
           this.periodosSelecionados = myArr1;
         } else {
           this.periodosSelecionados = null;
           this.alunos = [];
           this.alunosPresentes = null;
-         
         }
 
         
@@ -171,14 +194,32 @@ export class ChamadaCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.edicao) {
+      this.atualizar();
+    } else {
+      this.adicionar();
+    }
+  }
+
+  adicionar() {
     const chamada = new Chamada();
     chamada.alunosPresentes = this.alunosPresentes;
     chamada.periodosSelecionados= this.periodosSelecionados;
     chamada.dateChamada = this.value;
     this.chamadaService.chamada(chamada)
-        .then(alunos => {
+        .then(chamada => {
           
+          this.messageService.addSucesso('Chamada adicionada com sucesso!');
+          this.router.navigate(['/chamada', chamada.codigo]);
+
         }).catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizar() {
+  }
+
+  novo() {
+    this.router.navigate(['/chamada/nova']);
   }
 
 }

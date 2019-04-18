@@ -55,6 +55,11 @@ export class ChamadaService {
       .toPromise();
   }
 
+  buscarChamadaAlunos(chamada: Chamada): Promise<any> {
+    return this.http.post<any>(`${this.chamadaUrl}/getChamadaAlunos`, chamada)
+      .toPromise();
+  }
+
   buscarPorCodigo(codigo: number): Promise<any> {
     return this.http.get<any>(`${this.chamadaUrl}/${codigo}`)
       .toPromise()
