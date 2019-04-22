@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProfessoresModule } from './professores/professores.module';
 
 import {FormsModule} from '@angular/forms';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {LocationStrategy, HashLocationStrategy, registerLocaleData} from '@angular/common';
 import 'rxjs/add/operator/toPromise';
 
 
@@ -92,6 +92,8 @@ import {ToolbarModule} from 'primeng/primeng';
 import {TooltipModule} from 'primeng/primeng';
 import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
+import localept from '@angular/common/locales/pt';
+registerLocaleData(localept, 'pt');
 
 
 
@@ -193,7 +195,7 @@ import {TreeTableModule} from 'primeng/primeng';
     AppRoutingModule,
 
   ],
-  providers: [BreadcrumbService,{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+  providers: [BreadcrumbService,{ provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -121,10 +121,8 @@ export class ChamadaCadastroComponent implements OnInit {
       
         if (this.chamada){
           this.turmaDisciplinaSelecionada =  this.chamada.turmaPeriodo.disciplinaTurma.codigo;
-          
           let newDt = new Date(this.chamada.dataChamada);
-          this.value = newDt;
-         
+          this.value = new Date(newDt.valueOf() + newDt.getTimezoneOffset() * 60000);
           this.carregarPeriodos();
         } else {
           this.turmaDisciplinaSelecionada = null;
@@ -208,14 +206,25 @@ export class ChamadaCadastroComponent implements OnInit {
     chamada.dateChamada = this.value;
     this.chamadaService.chamada(chamada)
         .then(chamada => {
-          
           this.messageService.addSucesso('Chamada adicionada com sucesso!');
-          this.router.navigate(['/chamada', chamada.codigo]);
-
+          this.router.navigate(['/chamada']);
         }).catch(erro => this.errorHandler.handle(erro));
   }
 
   atualizar() {
+    let chamada = new Chamada();
+    console.log('entrou..')
+    chamada.codigo = this.codigo;
+    console.log(this.alunosPresentes);
+    chamada.alunosPresentes = this.alunosPresentes;
+    chamada.periodosSelecionados= this.periodosSelecionados;
+    chamada.dateChamada = this.value;
+    console.log(chamada);
+    this.chamadaService.chamadaAlteracao(chamada)
+        .then(chamada => {
+          this.messageService.addSucesso('Chamada Aletarda com sucesso!');
+          this.router.navigate(['/chamada']);
+        }).catch(erro => this.errorHandler.handle(erro));
   }
 
   novo() {

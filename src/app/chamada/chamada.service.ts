@@ -50,6 +50,12 @@ export class ChamadaService {
       .toPromise();
   }
 
+  chamadaAlteracao(chamada: any): Promise<any> {
+    return this.http.post<any>(`${this.chamadaUrl}/alteracao`, chamada)
+      .toPromise();
+  }
+  
+
   pesquisaChamada(chamada: ChamadaPesquisa): Promise<any> {
     return this.http.post<any>(`${this.chamadaUrl}/pesquisa`, chamada)
       .toPromise();

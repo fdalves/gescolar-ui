@@ -1,5 +1,6 @@
 export class Chamada {
-  periodosSelecionados: any;
+  codigo: any;
+  periodosSelecionados = [];
   alunosPresentes: any;
   dateChamada: Date;
 }
