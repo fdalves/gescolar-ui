@@ -1,11 +1,9 @@
 <div class="ui-fluid">
+    <div class="no-margin">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Aluno</h1>
+      </div>
   <div class="card no-margin">
     <form [formGroup]="formulario" (ngSubmit)="salvar()" autocomplete="off">
-
-      <h1>
-        <h1>{{ editando ? 'Edição de' : 'Novo' }} Aluno</h1>
-      </h1>
-
       <div class="ui-g form-group">
 
 
