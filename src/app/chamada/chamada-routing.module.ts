@@ -8,6 +8,7 @@ const routes: Routes = [
     path: 'chamada',
     component: ChamadaPesquisaComponent
   },
+  
   {
     path: 'chamada/nova',
     component: ChamadaCadastroComponent

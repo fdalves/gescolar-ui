@@ -12,7 +12,7 @@
             </div>
 
             <div class="ui-g-12 ui-md-7">
-                <p-dropdown placeholder="Selecione Turma/Disciplina" required  #turmaCham [filter]="true" [autoWidth]="false" [options]="turmaDisciplinas" [(ngModel)]="turmaDisciplinaSelecionada" name="turmaDisciplinaSelecionada" ></p-dropdown>
+                <p-dropdown placeholder="Selecione Turma/Disciplina" required (onChange)="changeTurmaperiodo()"  #turmaCham [filter]="true"  [autoWidth]="false" [options]="turmaDisciplinas" [(ngModel)]="turmaDisciplinaSelecionada" name="turmaDisciplinaSelecionada" ></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-md-8">
@@ -50,9 +50,9 @@
                   <ng-template pTemplate="body" let-chamada>
                     <tr>
                       <td style="text-align: center">{{chamada.turmaPeriodo.dia}}</td>
-                      <td style="text-align: center">{{chamada.dataChamada}}</td>
+                      <td style="text-align: center">{{chamada.dataChamada | date: 'dd/MM/yyyy'}}</td>
                       <td style="text-align: center">{{chamada.turmaPeriodo.periodo}}</td>
-                      <td style="text-align: center"> {{turmaCham.label}}</td>
+                      <td style="text-align: center"> {{chamada.turmaDisciplina}}</td>
                       <td style="width:5em; text-align: center">
                         <a pButton icon="fa ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/chamada', chamada.codigo]"></a>
                       </td>

@@ -5,6 +5,7 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
 import { ChamadaService } from '../chamada.service';
 import { Aluno, ChamadaPesquisa } from '../../core/model';
 import { FormControl } from '../../../../node_modules/@angular/forms';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-chamada-pesquisa',
@@ -22,15 +23,22 @@ export class ChamadaPesquisaComponent implements OnInit {
   turmaDisciplinas: any;
   turmaDisciplinaSelecionada: any;
   chamadas = []; 
-  
+  turmaDisciplinaFiltro: any;
 
   constructor(private authService: AuthService,
     private professorService: ProfessorService,
     private errorHandler: ErrorHandlerService,
-    private chamadaService: ChamadaService) { }
+    private chamadaService: ChamadaService,
+    private route: ActivatedRoute) { }
 
     
   ngOnInit() {
+
+    const professorSelecionado = this.route.snapshot.params['professorSelecionado'];
+    const turmaDisciplinaSelecionada = this.route.snapshot.params['turmaDisciplinaSelecionada'];
+    const data = this.route.snapshot.params['date'];
+
+    
 
     this.carregaProf();
     if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'PROFESSOR') {
@@ -50,8 +58,20 @@ export class ChamadaPesquisaComponent implements OnInit {
       clear: 'Limpar'
     };
 
+    if (professorSelecionado && turmaDisciplinaSelecionada && data){
+      this.professorSelecionado = professorSelecionado;
+      
+      this.turmaDisciplinaSelecionada = turmaDisciplinaSelecionada;
+      this.turmaDisciplinaFiltro = turmaDisciplinaSelecionada
+      this.carregarTurmaDisciplina();
+      this.value.setTime(data);
+      this.value2.setTime(data);
+      this.pesquisar(null);
+    }
+
   }
 
+  
 
   carregaProf(): any {
     return this.professorService.listarTodas()
@@ -66,10 +86,12 @@ export class ChamadaPesquisaComponent implements OnInit {
     return this.chamadaService.getTurmasProfessor(this.professorSelecionado)
       .then(turmaDisciplinas => {
         this.turmaDisciplinaSelecionada = null;
-        this.turmaDisciplinas = turmaDisciplinas
-        .map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
-      }
-    )
+        this.chamadas = []; 
+        this.turmaDisciplinas = turmaDisciplinas.map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
+        if (this.turmaDisciplinaFiltro) {
+          this.turmaDisciplinaSelecionada = this.turmaDisciplinaFiltro;
+        }
+      })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
