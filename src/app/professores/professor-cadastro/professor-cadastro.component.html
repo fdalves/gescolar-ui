@@ -1,9 +1,11 @@
 <div class="ui-fluid">
+  <div class="no-margin">
+
+    <h1>{{ editando ? 'Edição de' : 'Novo' }} Professor</h1>
+  </div>
   <div class="card no-margin">
     <form [formGroup]="formulario" (ngSubmit)="salvar()" autocomplete="off">
-      <h1>
-        <h1>{{ editando ? 'Edição de' : 'Novo' }} Professor</h1>
-      </h1>
+
       <div class="ui-g form-group">
 
 
@@ -21,7 +23,7 @@
 
         <div class="ui-g-12 ui-md-12">
           <span class="md-inputfield">
-            <p-inputMask mask="999.999.999-99" type="text" [(ngModel)]="cpf" [cpf]="cpf"  formControlName="cpf" name="cpf"></p-inputMask>
+            <p-inputMask mask="999.999.999-99" type="text" [(ngModel)]="cpf" [cpf]="cpf" formControlName="cpf" name="cpf"></p-inputMask>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['cpf'].valid&&formulario.controls['cpf'].dirty">
               <span *ngIf="formulario.controls['cpf'].errors ? formulario.controls['cpf'].errors['required'] : false">O Campo CPF é Obrigatório.</span>
               <span *ngIf="formulario.controls['cpf'].errors ? formulario.controls['cpf'].errors['cpfExistente'] : false">CPF já cadastrata.</span>
@@ -62,10 +64,10 @@
             <label>Sexo</label>
           </div>
           <div class="ui-g-12 ui-md-12">
-            <p-radioButton name="sexoTeste" formControlName="sexo"  value="M" label="Masculino"></p-radioButton>
+            <p-radioButton name="sexoTeste" formControlName="sexo" value="M" label="Masculino"></p-radioButton>
           </div>
           <div class="ui-g-12 ui-md-12">
-            <p-radioButton name="sexoTeste" formControlName="sexo"  value="F" label="Feminino"></p-radioButton>
+            <p-radioButton name="sexoTeste" formControlName="sexo" value="F" label="Feminino"></p-radioButton>
           </div>
         </div>
 
