@@ -207,7 +207,12 @@ export class ChamadaCadastroComponent implements OnInit {
     this.chamadaService.chamada(chamada)
         .then(chamada => {
           this.messageService.addSucesso('Chamada adicionada com sucesso!');
-          this.router.navigate(['/chamada',{professorSelecionado: this.professorSelecionado, turmaDisciplinaSelecionada: this.turmaDisciplinaSelecionada, date: this.value.getTime()}]);
+          let dateLong: any;
+          if (this.value) {
+            dateLong = this.value.getTime();
+          }
+          
+          this.router.navigate(['/chamada',{professorSelecionado: this.professorSelecionado, turmaDisciplinaSelecionada: this.turmaDisciplinaSelecionada, date: dateLong}]);
         }).catch(erro => this.errorHandler.handle(erro));
   }
 
@@ -229,6 +234,11 @@ export class ChamadaCadastroComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate(['/chamada',{professorSelecionado: this.professorSelecionado, turmaDisciplinaSelecionada: this.turmaDisciplinaSelecionada, date: this.value.getTime()}]);
+    let dateLong: any;
+    console.log(this.value);
+    if (this.value) {
+      dateLong = this.value.getTime();
+    }
+    this.router.navigate(['/chamada',{professorSelecionado: this.professorSelecionado, turmaDisciplinaSelecionada: this.turmaDisciplinaSelecionada, date: dateLong}]);
   }
 }

@@ -58,7 +58,14 @@ export class ChamadaPesquisaComponent implements OnInit {
       clear: 'Limpar'
     };
 
-    if (professorSelecionado && turmaDisciplinaSelecionada && data){
+
+
+    if (professorSelecionado && turmaDisciplinaSelecionada && data
+      && ( professorSelecionado  !== "undefined")  
+        && (turmaDisciplinaSelecionada  !== "undefined")
+        && (data  !== "undefined") ){
+    console.log('nao podia entrat');      
+
       this.professorSelecionado = professorSelecionado;
       
       this.turmaDisciplinaSelecionada = turmaDisciplinaSelecionada;
