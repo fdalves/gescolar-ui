@@ -65,8 +65,7 @@ export class ChamadaPesquisaComponent implements OnInit {
       && ( professorSelecionado  !== "undefined")  
         && (turmaDisciplinaSelecionada  !== "undefined")
         && (data  !== "undefined") ){
-    console.log('nao podia entrat');      
-
+    
       this.professorSelecionado = professorSelecionado;
       
       this.turmaDisciplinaSelecionada = turmaDisciplinaSelecionada;

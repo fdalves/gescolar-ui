@@ -79,9 +79,6 @@ export class AuthService {
   }
 
   temPermissao(permissao: string) {
-    console.log('entrou.. tem permissao')
-    console.log(permissao)
-    console.log(this.jwtPayload);
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
 

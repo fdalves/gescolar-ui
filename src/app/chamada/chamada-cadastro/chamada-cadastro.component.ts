@@ -236,7 +236,6 @@ export class ChamadaCadastroComponent implements OnInit {
 
   voltar() {
     let dateLong: any;
-    console.log(this.value);
     if (this.value) {
       dateLong = this.value.getTime();
     }
