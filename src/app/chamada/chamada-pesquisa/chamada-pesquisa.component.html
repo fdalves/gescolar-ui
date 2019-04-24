@@ -17,13 +17,13 @@
 
             <div class="ui-g-12 ui-md-8">
                 <div class="ui-g-12 ui-md-3">
-                    <p-calendar [(ngModel)]="value"   required  placeholder="Selecione a Data Inicial" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
+                    <p-calendar [(ngModel)]="value" (onSelect)="changeDate()"   required  placeholder="Selecione a Data Inicial" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
                  </div>
                  <div class="ui-g-12 ui-md-1">
                     <span>até</span>
                  </div>  
                  <div class="ui-g-12 ui-md-3">
-                    <p-calendar [(ngModel)]="value2"   required  placeholder="Selecione a Data Final" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value1"></p-calendar>
+                    <p-calendar [(ngModel)]="value2" (onSelect)="changeDate()"  required  placeholder="Selecione a Data Final" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value1"></p-calendar>
                  </div>   
             </div>
 

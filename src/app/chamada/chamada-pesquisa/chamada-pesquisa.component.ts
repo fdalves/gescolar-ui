@@ -115,5 +115,13 @@ export class ChamadaPesquisaComponent implements OnInit {
         }).catch(erro => this.errorHandler.handle(erro));
   }
 
+  changeDate() {
+    if (this.value && this.value2) {
+        if (this.value > this.value2) {
+          this.value2 = null;
+          this.errorHandler.handle('Data inicinal não pode ser maior que data final');
+        }
+    }
+  }
 
 }
