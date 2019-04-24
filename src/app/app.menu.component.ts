@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {MenuItem, ScrollPanel} from 'primeng/primeng';
 import {AppComponent} from './app.component';
+import { AuthService } from './seguranca/auth.service';
 
 @Component({
     selector: 'app-menu',
@@ -17,124 +18,234 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
     @ViewChild('scrollPanel') layoutMenuScrollerViewChild: ScrollPanel;
 
-    constructor(public app: AppComponent) {}
+    constructor(public app: AppComponent,private authService: AuthService) {}
 
     ngAfterViewInit() {
       setTimeout(() => {this.layoutMenuScrollerViewChild.moveBar(); }, 100);
     }
 
     ngOnInit() {
-        this.model = [
 
-          {
-            label: 'Adimistrativo', icon: 'settings', 
-            items: [
-                {label: 'Professores', icon: 'label', routerLink: ['/professores']},
-                {label: 'Alunos', icon: 'label', routerLink: ['/alunos']},
-                {label: 'Turmas', icon: 'label', routerLink: ['/turmas']},
-            ]
-        },
-
-
-        {
-            label: 'Chamada', icon: 'list', 
-            items: [
-                {label: 'Chamada', icon: 'list', routerLink: ['/chamada/nova']},
-                {label: 'Chamada Pesquisa', icon: 'list', routerLink: ['/chamada']},
-            ]
-        },
-
-
+        if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'ADIM') {
+            this.model = [
             
-            {
-                label: 'Menu Modes', icon: 'settings',
-                items: [
-                    {label: 'Static Menu', icon: 'view_quilt', command: (event) => {this.app.layoutMode = 'static'; }},
-                    {label: 'Overlay Menu', icon: 'flip_to-front', command: (event) => {this.app.layoutMode = 'overlay'; }},
-                    {label: 'Horizontal Menu', icon: 'border_horizontal', command: (event) => {this.app.layoutMode = 'horizontal'; }},
-                    {label: 'Light Menu', icon: 'label', command: (event) => {this.app.darkMenu = false; }},
-                    {label: 'Dark Menu', icon: 'label_outline', command: (event) => {this.app.darkMenu = true; }},
-                    {
-                        label: 'Orientation', icon: 'format_align_right',
-                        items: [
-                            {label: 'LTR', icon: 'format_align_left', command: (event) => {this.app.isRTL = false; }},
-                            {label: 'RTL', icon: 'format_align_right', command: (event) => {this.app.isRTL = true; }}
-                        ]
-                    }
-                ]
-            },
-            {
-                label: 'Colors', icon: 'palette',
-                items: [
-                    {
-                        label: 'Layout Palette', icon: 'palette',
-                        items: [
-                            {
-                                label: 'Flat', icon: 'format_paint',
-                                items: [
-                                    {label: 'Blue Grey - Green', icon: 'brush', command: (event) => {this.changeLayout('bluegrey'); }},
-                                    {label: 'Indigo - Pink', icon: 'brush', command: (event) => {this.changeLayout('indigo'); }},
-                                    {label: 'Pink - Amber', icon: 'brush', command: (event) => {this.changeLayout('pink'); }},
-                                    {label: 'Deep Purple - Orange', icon: 'brush', command: (event) => {this.changeLayout('deeppurple'); }},
-                                    {label: 'Blue - Amber', icon: 'brush', command: (event) => {this.changeLayout('blue'); }},
-                                    {label: 'Light Blue - Blue Grey', icon: 'brush',
-                                        command: (event) => {this.changeLayout('lightblue'); }},
-                                    {label: 'Cyan - Amber', icon: 'brush', command: (event) => {this.changeLayout('cyan'); }},
-                                    {label: 'Teal - Red', icon: 'brush', command: (event) => {this.changeLayout('teal'); }},
-                                    {label: 'Green - Brown', icon: 'brush', command: (event) => {this.changeLayout('green'); }},
-                                    {label: 'Light Green - Purple', icon: 'brush', command: (event) => {this.changeLayout('lightgreen'); }},
-                                    {label: 'Lime - Blue Grey', icon: 'brush', command: (event) => {this.changeLayout('lime'); }},
-                                    {label: 'Yellow - Teal', icon: 'brush', command: (event) => {this.changeLayout('yellow'); }},
-                                    {label: 'Amber - Pink', icon: 'brush', command: (event) => {this.changeLayout('amber'); }},
-                                    {label: 'Orange - Indigo', icon: 'brush', command: (event) => {this.changeLayout('orange'); }},
-                                    {label: 'Deep Orange - Cyan', icon: 'brush', command: (event) => {this.changeLayout('deeporange'); }},
-                                    {label: 'Brown - Cyan', icon: 'brush', command: (event) => {this.changeLayout('brown'); }},
-                                    {label: 'Grey - Indigo', icon: 'brush', command: (event) => {this.changeLayout('grey'); }}
-                                ]
-                            },
-                            {
-                                label: 'Special', icon: 'format_paint',
-                                items: [
-                                    {label: 'Reflection', icon: 'brush', command: (event) => {this.changeLayout('reflection'); }},
-                                    {label: 'Moody', icon: 'brush', command: (event) => {this.changeLayout('moody'); }},
-                                    {label: 'Cityscape', icon: 'brush', command: (event) => {this.changeLayout('cityscape'); }},
-                                    {label: 'Cloudy', icon: 'brush', command: (event) => {this.changeLayout('cloudy'); }},
-                                    {label: 'Storm', icon: 'brush', command: (event) => {this.changeLayout('storm'); }},
-                                    {label: 'Palm', icon: 'brush', command: (event) => {this.changeLayout('palm'); }},
-                                    {label: 'Flatiron', icon: 'brush', command: (event) => {this.changeLayout('flatiron'); }}
-                                ]
-                            },
-                        ]
-                    },
-                    {
-                        label: 'Themes', icon: 'brush', badge: '5',
-                        items: [
-                            {label: 'Blue Grey - Green', icon: 'brush', command: (event) => {this.changeTheme('bluegrey'); }},
-                            {label: 'Indigo - Pink', icon: 'brush', command: (event) => {this.changeTheme('indigo'); }},
-                            {label: 'Pink - Amber', icon: 'brush', command: (event) => {this.changeTheme('pink'); }},
-                            {label: 'Purple - Pink', icon: 'brush', command: (event) => {this.changeTheme('purple'); }},
-                            {label: 'Deep Purple - Orange', icon: 'brush', command: (event) => {this.changeTheme('deeppurple'); }},
-                            {label: 'Blue - Amber', icon: 'brush', command: (event) => {this.changeTheme('blue'); }},
-                            {label: 'Light Blue - Blue Grey', icon: 'brush', command: (event) => {this.changeTheme('lightblue'); }},
-                            {label: 'Cyan - Amber', icon: 'brush', command: (event) => {this.changeTheme('cyan'); }},
-                            {label: 'Teal - Red', icon: 'brush', command: (event) => {this.changeTheme('teal'); }},
-                            {label: 'Green - Brown', icon: 'brush', command: (event) => {this.changeTheme('green'); }},
-                            {label: 'Light Green - Purple', icon: 'brush', command: (event) => {this.changeTheme('lightgreen'); }},
-                            {label: 'Lime - Blue Grey', icon: 'brush', command: (event) => {this.changeTheme('lime'); }},
-                            {label: 'Yellow - Teal', icon: 'brush', command: (event) => {this.changeTheme('yellow'); }},
-                            {label: 'Amber - Pink', icon: 'brush', command: (event) => {this.changeTheme('amber'); }},
-                            {label: 'Orange - Indigo', icon: 'brush', command: (event) => {this.changeTheme('orange'); }},
-                            {label: 'Deep Orange - Cyan', icon: 'brush', command: (event) => {this.changeTheme('deeporange'); }},
-                            {label: 'Brown - Cyan', icon: 'brush', command: (event) => {this.changeTheme('brown'); }},
-                            {label: 'Grey - Indigo', icon: 'brush', command: (event) => {this.changeTheme('grey'); }}
-                        ]
-                    }
-                ]
-            }
-           
-           
-           
-        ];
+                {
+                  label: 'Adimistrativo', icon: 'settings', 
+                  items: [
+                      {label: 'Professores', icon: 'label', routerLink: ['/professores'] },
+                      {label: 'Alunos', icon: 'label', routerLink: ['/alunos']},
+                      {label: 'Turmas', icon: 'label', routerLink: ['/turmas']},
+                  ]
+              },
+          
+              
+      
+              {
+                  label: 'Chamada', icon: 'list', 
+                  items: [
+                      {label: 'Chamada', icon: 'list', routerLink: ['/chamada/nova']},
+                      {label: 'Chamada Pesquisa', icon: 'list', routerLink: ['/chamada']},
+                  ]
+              },
+      
+      
+                  
+                  {
+                      label: 'Menu Modes', icon: 'settings',
+                      items: [
+                          {label: 'Static Menu', icon: 'view_quilt', command: (event) => {this.app.layoutMode = 'static'; }},
+                          {label: 'Overlay Menu', icon: 'flip_to-front', command: (event) => {this.app.layoutMode = 'overlay'; }},
+                          {label: 'Horizontal Menu', icon: 'border_horizontal', command: (event) => {this.app.layoutMode = 'horizontal'; }},
+                          {label: 'Light Menu', icon: 'label', command: (event) => {this.app.darkMenu = false; }},
+                          {label: 'Dark Menu', icon: 'label_outline', command: (event) => {this.app.darkMenu = true; }},
+                          {
+                              label: 'Orientation', icon: 'format_align_right',
+                              items: [
+                                  {label: 'LTR', icon: 'format_align_left', command: (event) => {this.app.isRTL = false; }},
+                                  {label: 'RTL', icon: 'format_align_right', command: (event) => {this.app.isRTL = true; }}
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      label: 'Colors', icon: 'palette',
+                      items: [
+                          {
+                              label: 'Layout Palette', icon: 'palette',
+                              items: [
+                                  {
+                                      label: 'Flat', icon: 'format_paint',
+                                      items: [
+                                          {label: 'Blue Grey - Green', icon: 'brush', command: (event) => {this.changeLayout('bluegrey'); }},
+                                          {label: 'Indigo - Pink', icon: 'brush', command: (event) => {this.changeLayout('indigo'); }},
+                                          {label: 'Pink - Amber', icon: 'brush', command: (event) => {this.changeLayout('pink'); }},
+                                          {label: 'Deep Purple - Orange', icon: 'brush', command: (event) => {this.changeLayout('deeppurple'); }},
+                                          {label: 'Blue - Amber', icon: 'brush', command: (event) => {this.changeLayout('blue'); }},
+                                          {label: 'Light Blue - Blue Grey', icon: 'brush',
+                                              command: (event) => {this.changeLayout('lightblue'); }},
+                                          {label: 'Cyan - Amber', icon: 'brush', command: (event) => {this.changeLayout('cyan'); }},
+                                          {label: 'Teal - Red', icon: 'brush', command: (event) => {this.changeLayout('teal'); }},
+                                          {label: 'Green - Brown', icon: 'brush', command: (event) => {this.changeLayout('green'); }},
+                                          {label: 'Light Green - Purple', icon: 'brush', command: (event) => {this.changeLayout('lightgreen'); }},
+                                          {label: 'Lime - Blue Grey', icon: 'brush', command: (event) => {this.changeLayout('lime'); }},
+                                          {label: 'Yellow - Teal', icon: 'brush', command: (event) => {this.changeLayout('yellow'); }},
+                                          {label: 'Amber - Pink', icon: 'brush', command: (event) => {this.changeLayout('amber'); }},
+                                          {label: 'Orange - Indigo', icon: 'brush', command: (event) => {this.changeLayout('orange'); }},
+                                          {label: 'Deep Orange - Cyan', icon: 'brush', command: (event) => {this.changeLayout('deeporange'); }},
+                                          {label: 'Brown - Cyan', icon: 'brush', command: (event) => {this.changeLayout('brown'); }},
+                                          {label: 'Grey - Indigo', icon: 'brush', command: (event) => {this.changeLayout('grey'); }}
+                                      ]
+                                  },
+                                  {
+                                      label: 'Special', icon: 'format_paint',
+                                      items: [
+                                          {label: 'Reflection', icon: 'brush', command: (event) => {this.changeLayout('reflection'); }},
+                                          {label: 'Moody', icon: 'brush', command: (event) => {this.changeLayout('moody'); }},
+                                          {label: 'Cityscape', icon: 'brush', command: (event) => {this.changeLayout('cityscape'); }},
+                                          {label: 'Cloudy', icon: 'brush', command: (event) => {this.changeLayout('cloudy'); }},
+                                          {label: 'Storm', icon: 'brush', command: (event) => {this.changeLayout('storm'); }},
+                                          {label: 'Palm', icon: 'brush', command: (event) => {this.changeLayout('palm'); }},
+                                          {label: 'Flatiron', icon: 'brush', command: (event) => {this.changeLayout('flatiron'); }}
+                                      ]
+                                  },
+                              ]
+                          },
+                          {
+                              label: 'Themes', icon: 'brush', badge: '5',
+                              items: [
+                                  {label: 'Blue Grey - Green', icon: 'brush', command: (event) => {this.changeTheme('bluegrey'); }},
+                                  {label: 'Indigo - Pink', icon: 'brush', command: (event) => {this.changeTheme('indigo'); }},
+                                  {label: 'Pink - Amber', icon: 'brush', command: (event) => {this.changeTheme('pink'); }},
+                                  {label: 'Purple - Pink', icon: 'brush', command: (event) => {this.changeTheme('purple'); }},
+                                  {label: 'Deep Purple - Orange', icon: 'brush', command: (event) => {this.changeTheme('deeppurple'); }},
+                                  {label: 'Blue - Amber', icon: 'brush', command: (event) => {this.changeTheme('blue'); }},
+                                  {label: 'Light Blue - Blue Grey', icon: 'brush', command: (event) => {this.changeTheme('lightblue'); }},
+                                  {label: 'Cyan - Amber', icon: 'brush', command: (event) => {this.changeTheme('cyan'); }},
+                                  {label: 'Teal - Red', icon: 'brush', command: (event) => {this.changeTheme('teal'); }},
+                                  {label: 'Green - Brown', icon: 'brush', command: (event) => {this.changeTheme('green'); }},
+                                  {label: 'Light Green - Purple', icon: 'brush', command: (event) => {this.changeTheme('lightgreen'); }},
+                                  {label: 'Lime - Blue Grey', icon: 'brush', command: (event) => {this.changeTheme('lime'); }},
+                                  {label: 'Yellow - Teal', icon: 'brush', command: (event) => {this.changeTheme('yellow'); }},
+                                  {label: 'Amber - Pink', icon: 'brush', command: (event) => {this.changeTheme('amber'); }},
+                                  {label: 'Orange - Indigo', icon: 'brush', command: (event) => {this.changeTheme('orange'); }},
+                                  {label: 'Deep Orange - Cyan', icon: 'brush', command: (event) => {this.changeTheme('deeporange'); }},
+                                  {label: 'Brown - Cyan', icon: 'brush', command: (event) => {this.changeTheme('brown'); }},
+                                  {label: 'Grey - Indigo', icon: 'brush', command: (event) => {this.changeTheme('grey'); }}
+                              ]
+                          }
+                      ]
+                  }
+                 
+                 
+                 
+              ];
+        }
+
+        if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'PROFESSOR') {
+            this.model = [
+            
+               {
+                  label: 'Chamada', icon: 'list', 
+                  items: [
+                      {label: 'Chamada', icon: 'list', routerLink: ['/chamada/nova']},
+                      {label: 'Chamada Pesquisa', icon: 'list', routerLink: ['/chamada']},
+                  ]
+              },
+      
+      
+                  
+                  {
+                      label: 'Menu Modes', icon: 'settings',
+                      items: [
+                          {label: 'Static Menu', icon: 'view_quilt', command: (event) => {this.app.layoutMode = 'static'; }},
+                          {label: 'Overlay Menu', icon: 'flip_to-front', command: (event) => {this.app.layoutMode = 'overlay'; }},
+                          {label: 'Horizontal Menu', icon: 'border_horizontal', command: (event) => {this.app.layoutMode = 'horizontal'; }},
+                          {label: 'Light Menu', icon: 'label', command: (event) => {this.app.darkMenu = false; }},
+                          {label: 'Dark Menu', icon: 'label_outline', command: (event) => {this.app.darkMenu = true; }},
+                          {
+                              label: 'Orientation', icon: 'format_align_right',
+                              items: [
+                                  {label: 'LTR', icon: 'format_align_left', command: (event) => {this.app.isRTL = false; }},
+                                  {label: 'RTL', icon: 'format_align_right', command: (event) => {this.app.isRTL = true; }}
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      label: 'Colors', icon: 'palette',
+                      items: [
+                          {
+                              label: 'Layout Palette', icon: 'palette',
+                              items: [
+                                  {
+                                      label: 'Flat', icon: 'format_paint',
+                                      items: [
+                                          {label: 'Blue Grey - Green', icon: 'brush', command: (event) => {this.changeLayout('bluegrey'); }},
+                                          {label: 'Indigo - Pink', icon: 'brush', command: (event) => {this.changeLayout('indigo'); }},
+                                          {label: 'Pink - Amber', icon: 'brush', command: (event) => {this.changeLayout('pink'); }},
+                                          {label: 'Deep Purple - Orange', icon: 'brush', command: (event) => {this.changeLayout('deeppurple'); }},
+                                          {label: 'Blue - Amber', icon: 'brush', command: (event) => {this.changeLayout('blue'); }},
+                                          {label: 'Light Blue - Blue Grey', icon: 'brush',
+                                              command: (event) => {this.changeLayout('lightblue'); }},
+                                          {label: 'Cyan - Amber', icon: 'brush', command: (event) => {this.changeLayout('cyan'); }},
+                                          {label: 'Teal - Red', icon: 'brush', command: (event) => {this.changeLayout('teal'); }},
+                                          {label: 'Green - Brown', icon: 'brush', command: (event) => {this.changeLayout('green'); }},
+                                          {label: 'Light Green - Purple', icon: 'brush', command: (event) => {this.changeLayout('lightgreen'); }},
+                                          {label: 'Lime - Blue Grey', icon: 'brush', command: (event) => {this.changeLayout('lime'); }},
+                                          {label: 'Yellow - Teal', icon: 'brush', command: (event) => {this.changeLayout('yellow'); }},
+                                          {label: 'Amber - Pink', icon: 'brush', command: (event) => {this.changeLayout('amber'); }},
+                                          {label: 'Orange - Indigo', icon: 'brush', command: (event) => {this.changeLayout('orange'); }},
+                                          {label: 'Deep Orange - Cyan', icon: 'brush', command: (event) => {this.changeLayout('deeporange'); }},
+                                          {label: 'Brown - Cyan', icon: 'brush', command: (event) => {this.changeLayout('brown'); }},
+                                          {label: 'Grey - Indigo', icon: 'brush', command: (event) => {this.changeLayout('grey'); }}
+                                      ]
+                                  },
+                                  {
+                                      label: 'Special', icon: 'format_paint',
+                                      items: [
+                                          {label: 'Reflection', icon: 'brush', command: (event) => {this.changeLayout('reflection'); }},
+                                          {label: 'Moody', icon: 'brush', command: (event) => {this.changeLayout('moody'); }},
+                                          {label: 'Cityscape', icon: 'brush', command: (event) => {this.changeLayout('cityscape'); }},
+                                          {label: 'Cloudy', icon: 'brush', command: (event) => {this.changeLayout('cloudy'); }},
+                                          {label: 'Storm', icon: 'brush', command: (event) => {this.changeLayout('storm'); }},
+                                          {label: 'Palm', icon: 'brush', command: (event) => {this.changeLayout('palm'); }},
+                                          {label: 'Flatiron', icon: 'brush', command: (event) => {this.changeLayout('flatiron'); }}
+                                      ]
+                                  },
+                              ]
+                          },
+                          {
+                              label: 'Themes', icon: 'brush', badge: '5',
+                              items: [
+                                  {label: 'Blue Grey - Green', icon: 'brush', command: (event) => {this.changeTheme('bluegrey'); }},
+                                  {label: 'Indigo - Pink', icon: 'brush', command: (event) => {this.changeTheme('indigo'); }},
+                                  {label: 'Pink - Amber', icon: 'brush', command: (event) => {this.changeTheme('pink'); }},
+                                  {label: 'Purple - Pink', icon: 'brush', command: (event) => {this.changeTheme('purple'); }},
+                                  {label: 'Deep Purple - Orange', icon: 'brush', command: (event) => {this.changeTheme('deeppurple'); }},
+                                  {label: 'Blue - Amber', icon: 'brush', command: (event) => {this.changeTheme('blue'); }},
+                                  {label: 'Light Blue - Blue Grey', icon: 'brush', command: (event) => {this.changeTheme('lightblue'); }},
+                                  {label: 'Cyan - Amber', icon: 'brush', command: (event) => {this.changeTheme('cyan'); }},
+                                  {label: 'Teal - Red', icon: 'brush', command: (event) => {this.changeTheme('teal'); }},
+                                  {label: 'Green - Brown', icon: 'brush', command: (event) => {this.changeTheme('green'); }},
+                                  {label: 'Light Green - Purple', icon: 'brush', command: (event) => {this.changeTheme('lightgreen'); }},
+                                  {label: 'Lime - Blue Grey', icon: 'brush', command: (event) => {this.changeTheme('lime'); }},
+                                  {label: 'Yellow - Teal', icon: 'brush', command: (event) => {this.changeTheme('yellow'); }},
+                                  {label: 'Amber - Pink', icon: 'brush', command: (event) => {this.changeTheme('amber'); }},
+                                  {label: 'Orange - Indigo', icon: 'brush', command: (event) => {this.changeTheme('orange'); }},
+                                  {label: 'Deep Orange - Cyan', icon: 'brush', command: (event) => {this.changeTheme('deeporange'); }},
+                                  {label: 'Brown - Cyan', icon: 'brush', command: (event) => {this.changeTheme('brown'); }},
+                                  {label: 'Grey - Indigo', icon: 'brush', command: (event) => {this.changeTheme('grey'); }}
+                              ]
+                          }
+                      ]
+                  }
+                 
+                 
+                 
+              ];
+          }
+
+        
     }
 
     changeTheme(theme) {
