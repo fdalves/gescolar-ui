@@ -27,18 +27,25 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
         this.model = [
 
           {
-            label: 'Adimistrativo', icon: 'list', badge: '2', badgeStyleClass: 'orange-badge',
+            label: 'Adimistrativo', icon: 'settings', 
             items: [
-                {label: 'Professores', icon: 'desktop_mac', routerLink: ['/professores']},
-                {label: 'Alunos', icon: 'desktop_mac', routerLink: ['/alunos']},
-                {label: 'Turmas', icon: 'desktop_mac', routerLink: ['/turmas']},
-                {label: 'Chamada', icon: 'desktop_mac', routerLink: ['/chamada/nova']},
-                {label: 'Chamada Pesquisa', icon: 'desktop_mac', routerLink: ['/chamada']},
+                {label: 'Professores', icon: 'label', routerLink: ['/professores']},
+                {label: 'Alunos', icon: 'label', routerLink: ['/alunos']},
+                {label: 'Turmas', icon: 'label', routerLink: ['/turmas']},
             ]
         },
 
 
-            {label: 'Dashboard', icon: 'dashboard', routerLink: ['/']},
+        {
+            label: 'Chamada', icon: 'list', 
+            items: [
+                {label: 'Chamada', icon: 'list', routerLink: ['/chamada/nova']},
+                {label: 'Chamada Pesquisa', icon: 'list', routerLink: ['/chamada']},
+            ]
+        },
+
+
+            
             {
                 label: 'Menu Modes', icon: 'settings',
                 items: [
@@ -123,80 +130,10 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
                         ]
                     }
                 ]
-            },
-            {
-                label: 'Components', icon: 'list', badge: '2', badgeStyleClass: 'orange-badge',
-                items: [
-                    {label: 'Sample Page', icon: 'desktop_mac', routerLink: ['/sample']},
-                    {label: 'Forms', icon: 'input', routerLink: ['/forms']},
-                    {label: 'Data', icon: 'grid_on', routerLink: ['/data']},
-                    {label: 'Panels', icon: 'content_paste', routerLink: ['/panels']},
-                    {label: 'Overlays', icon: 'content_copy', routerLink: ['/overlays']},
-                    {label: 'Menus', icon: 'menu', routerLink: ['/menus']},
-                    {label: 'Messages', icon: 'message', routerLink: ['/messages']},
-                    {label: 'Charts', icon: 'insert_chart', routerLink: ['/charts']},
-                    {label: 'File', icon: 'attach_file', routerLink: ['/file']},
-                    {label: 'Misc', icon: 'toys', routerLink: ['/misc']}
-                ]
-            },
-            {
-                label: 'Template Pages', icon: 'get_app',
-                items: [
-                    {label: 'Empty Page', icon: 'hourglass_empty', routerLink: ['/empty']},
-                    {label: 'Landing Page', icon: 'flight_land', url: 'assets/pages/landing.html', target: '_blank'},
-                    {label: 'Login Page', icon: 'verified_user', url: 'assets/pages/login.html', target: '_blank'},
-                    {label: 'Error Page', icon: 'error', url: 'assets/pages/error.html', target: '_blank'},
-                    {label: '404 Page', icon: 'error_outline', url: 'assets/pages/404.html', target: '_blank'},
-                    {label: 'Access Denied Page', icon: 'security', url: 'assets/pages/access.html', target: '_blank'}
-                ]
-            },
-            {
-                label: 'Menu Hierarchy', icon: 'menu',
-                items: [
-                    {
-                        label: 'Submenu 1', icon: 'subject',
-                        items: [
-                            {
-                                label: 'Submenu 1.1', icon: 'subject',
-                                items: [
-                                    {label: 'Submenu 1.1.1', icon: 'subject'},
-                                    {label: 'Submenu 1.1.2', icon: 'subject'},
-                                    {label: 'Submenu 1.1.3', icon: 'subject'},
-                                ]
-                            },
-                            {
-                                label: 'Submenu 1.2', icon: 'subject',
-                                items: [
-                                    {label: 'Submenu 1.2.1', icon: 'subject'},
-                                    {label: 'Submenu 1.2.2', icon: 'subject'}
-                                ]
-                            },
-                        ]
-                    },
-                    {
-                        label: 'Submenu 2', icon: 'subject',
-                        items: [
-                            {
-                                label: 'Submenu 2.1', icon: 'subject',
-                                items: [
-                                    {label: 'Submenu 2.1.1', icon: 'subject'},
-                                    {label: 'Submenu 2.1.2', icon: 'subject'},
-                                    {label: 'Submenu 2.1.3', icon: 'subject'}
-                                ]
-                            },
-                            {
-                                label: 'Submenu 2.2', icon: 'subject',
-                                items: [
-                                    {label: 'Submenu 2.2.1', icon: 'subject'},
-                                    {label: 'Submenu 2.2.2', icon: 'subject'}
-                                ]
-                            },
-                        ]
-                    }
-                ]
-            },
-            {label: 'Utils', icon: 'build', routerLink: ['/utils']},
-            {label: 'Docs', icon: 'find_in_page', routerLink: ['/documentation']}
+            }
+           
+           
+           
         ];
     }
 
