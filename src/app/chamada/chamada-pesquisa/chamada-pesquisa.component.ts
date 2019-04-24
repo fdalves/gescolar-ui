@@ -44,6 +44,7 @@ export class ChamadaPesquisaComponent implements OnInit {
     if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'PROFESSOR') {
       this.disableProf = true;
       this.professorSelecionado = this.authService.jwtPayload.codigoProfessor;
+      this.carregarTurmaDisciplina();
     }
 
     this.pt = {

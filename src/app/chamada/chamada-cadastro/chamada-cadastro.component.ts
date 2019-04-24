@@ -50,6 +50,7 @@ export class ChamadaCadastroComponent implements OnInit {
     if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'PROFESSOR') {
       this.disableProf = true;
       this.professorSelecionado = this.authService.jwtPayload.codigoProfessor;
+      this.carregarTurmaDisciplina();
     }
 
     const codigoChamda = this.route.snapshot.params['codigo'];

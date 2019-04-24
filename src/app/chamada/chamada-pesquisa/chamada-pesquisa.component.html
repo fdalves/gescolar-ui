@@ -7,8 +7,8 @@
     <form autocomplete="off" #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar(f)">
       <div class="ui-g form-group">
 
-        <div class="ui-g-12 ui-md-7" [hidden]="disableProf">
-                <p-dropdown placeholder="Selecione Professor" required (onChange)="carregarTurmaDisciplina()" [options]="professores" [filter]="true" [disabled]="disableProf" [autoWidth]="false" [(ngModel)]="professorSelecionado" name="professorSelecionado"   ></p-dropdown>
+        <div class="ui-g-12 ui-md-7">
+                <p-dropdown placeholder="Selecione Professor" [disabled]="disableProf" required (onChange)="carregarTurmaDisciplina()" [options]="professores" [filter]="true" [disabled]="disableProf" [autoWidth]="false" [(ngModel)]="professorSelecionado" name="professorSelecionado"   ></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-md-7">
