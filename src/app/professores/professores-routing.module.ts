@@ -8,7 +8,9 @@ import { AuthGuard } from './../seguranca/auth.guard';
 const routes: Routes = [
   {
     path: 'professores',
-    component: ProfessorPesquisaComponent
+    component: ProfessorPesquisaComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ADM'] }
   },
   {
     path: 'professores/nova',
