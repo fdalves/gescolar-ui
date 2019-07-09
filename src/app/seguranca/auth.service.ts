@@ -34,6 +34,7 @@ export class AuthService {
         this.armazenarToken(response.access_token);
       })
       .catch(response => {
+
         if (response.status === 400) {
           if (response.error === 'invalid_grant') {
             return Promise.reject('Usuário ou senha inválida!');
@@ -104,4 +105,12 @@ export class AuthService {
       this.armazenarToken(token);
     }
   }
+
+
+  atualizaTokenDeviceId(codigoUsuario: number, token: string): Promise<void> {
+    return this.http.get(`${environment.apiUrl}/device/atualiza/${codigoUsuario}/${token}`)
+      .toPromise()
+      .then(() => null);
+  }
+
 }

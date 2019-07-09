@@ -13,6 +13,7 @@ import { LogoutService } from './logout.service';
 import { AuthService } from './auth.service';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { ProgressSpinnerModule } from '../../../node_modules/primeng/primeng';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -22,7 +23,7 @@ export function tokenGetter() {
   imports: [
     CommonModule,
     FormsModule,
-
+    ProgressSpinnerModule,
     InputTextModule,
     ButtonModule,
 

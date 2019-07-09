@@ -10,6 +10,9 @@ import { AuthService } from './../auth.service';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
+  
+
+  emAndamento = false;
 
   constructor(
     private auth: AuthService,
@@ -18,13 +21,30 @@ export class LoginFormComponent {
   ) { }
 
   login(usuario: string, senha: string) {
+    this.emAndamento = true;
     this.auth.login(usuario, senha)
       .then(() => {
        this.router.navigate(['/professores']);
+       this.emAndamento = false;
+       this.atualizaDevice();
       })
       .catch(erro => {
+        this.emAndamento = false;
         this.errorHandler.handle(erro);
       });
+  }
+
+
+  atualizaDevice(){
+     const token = this.getDeviceToken()
+    if (this.auth.jwtPayload.codigoUsuario) {
+      this.auth.atualizaTokenDeviceId(this.auth.jwtPayload.codigoUsuario, token)
+      .then(() => {});
+    }
+  }
+
+  getDeviceToken(): any {
+    return "testeeeee12545";
   }
 
 }

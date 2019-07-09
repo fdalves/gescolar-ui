@@ -31,7 +31,9 @@
                       <button type="submit" label="Login" pButton icon="fa ui-icon-person"  [disabled]="!f.valid"
                        (click)="login(usuario.value, senha.value); senha.value = '';"></button>
                   </div>
-
+                  <div class="ui-g-12">
+                    <p-progressSpinner [hidden]="!emAndamento" [style]="{ width: '100px', height: '100px' }"></p-progressSpinner>
+                </div> 
                 </div>
           </div>
     </div>

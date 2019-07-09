@@ -21,6 +21,10 @@ export class ErrorHandlerService {
   handle(errorResponse: any) {
     let msg: string;
 
+    console.log(errorResponse);
+
+   
+
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
 
@@ -43,9 +47,18 @@ export class ErrorHandlerService {
 
       console.error('Ocorreu um erro', errorResponse);
 
+     
+
     } else {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';
       console.error('Ocorreu um erro', errorResponse);
+    }
+
+    
+    if (errorResponse.status === 400) {
+      if (errorResponse.error.error === 'invalid_grant') {
+        msg = 'Usuário ou senha inválida!';
+      }
     }
 
     this.growMessageService.addErro(msg);
