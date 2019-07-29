@@ -11,7 +11,6 @@ import { AuthService } from './../auth.service';
 })
 export class LoginFormComponent {
   
-
   emAndamento = false;
 
   constructor(
