@@ -83,6 +83,7 @@ import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 import { ChamadaPesquisaComponent } from './chamada-pesquisa/chamada-pesquisa.component';
 import { ChamadaRoutingModule } from './chamada-routing.module';
+import { ChamadaAlunoComponent } from './chamada-aluno/chamada-aluno.component';
 
 
 
@@ -172,6 +173,6 @@ import { ChamadaRoutingModule } from './chamada-routing.module';
     ProgressSpinnerModule,
 
   ],
-  declarations: [ChamadaCadastroComponent, ChamadaPesquisaComponent]
+  declarations: [ChamadaCadastroComponent, ChamadaPesquisaComponent, ChamadaAlunoComponent]
 })
 export class ChamadaModule { }

@@ -26,7 +26,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
 
-        if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'ADIM') {
+        if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'ADM') {
             this.model = [
             
                 {
@@ -43,8 +43,9 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
               {
                   label: 'Chamada', icon: 'list', 
                   items: [
-                      {label: 'Chamada', icon: 'list', routerLink: ['/chamada/nova']},
-                      {label: 'Chamada Pesquisa', icon: 'list', routerLink: ['/chamada']},
+                    {label: 'Chamada Aluno', icon: 'list', routerLink: ['/chamadaAluno']} ,
+                    {label: 'Chamada', icon: 'list', routerLink: ['/chamada/nova']},
+                    {label: 'Chamada Pesquisa', icon: 'list', routerLink: ['/chamada']},
                   ]
               },
       

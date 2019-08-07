@@ -2,6 +2,7 @@ import { ChamadaPesquisaComponent } from './chamada-pesquisa/chamada-pesquisa.co
 import { ChamadaCadastroComponent } from './chamada-cadastro/chamada-cadastro.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { ChamadaAlunoComponent } from './chamada-aluno/chamada-aluno.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,11 @@ const routes: Routes = [
     component: ChamadaPesquisaComponent
   },
   
+  {
+    path: 'chamadaAluno',
+    component: ChamadaAlunoComponent
+  },
+
   {
     path: 'chamada/nova',
     component: ChamadaCadastroComponent

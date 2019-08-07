@@ -1,8 +1,10 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer } from '@angular/core';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from './../auth.service';
+
+declare var FirebasePlugin: any
 
 @Component({
   selector: 'app-login-form',
@@ -10,10 +12,12 @@ import { AuthService } from './../auth.service';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
-  
+
+
   emAndamento = false;
 
   constructor(
+    public renderer: Renderer,
     private auth: AuthService,
     private errorHandler: ErrorHandlerService,
     private router: Router
@@ -23,9 +27,13 @@ export class LoginFormComponent {
     this.emAndamento = true;
     this.auth.login(usuario, senha)
       .then(() => {
-       this.router.navigate(['/professores']);
-       this.emAndamento = false;
-       this.atualizaDevice();
+        this.emAndamento = false;
+        if (typeof FirebasePlugin !== "undefined") {
+          this.getDeviceToken();
+        } else {
+            this.atualizaDevice("teste....")        
+        }
+        this.router.navigate(['/professores']);
       })
       .catch(erro => {
         this.emAndamento = false;
@@ -34,16 +42,22 @@ export class LoginFormComponent {
   }
 
 
-  atualizaDevice(){
-     const token = this.getDeviceToken()
+  atualizaDevice(token :any) {
     if (this.auth.jwtPayload.codigoUsuario) {
       this.auth.atualizaTokenDeviceId(this.auth.jwtPayload.codigoUsuario, token)
-      .then(() => {});
+        .then(() => { });
     }
   }
 
-  getDeviceToken(): any {
-    return "testeeeee12545";
+  getDeviceToken() {
+    alert('entrou...');
+    this.renderer.listenGlobal('document', 'deviceready', () => {
+      alert('entrou...2');
+      FirebasePlugin.getToken((token) => {
+        alert(token);
+        this.atualizaDevice(token);
+      });
+    });
   }
 
 }
