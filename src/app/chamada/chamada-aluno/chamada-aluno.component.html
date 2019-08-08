@@ -12,7 +12,7 @@
             </div>
 
             <div class="ui-g-12 ui-md-7">
-                <p-dropdown placeholder="Selecione Turma/Disciplina" required   #turmaCham [filter]="true"  [autoWidth]="false" [options]="turmaDisciplinas" [(ngModel)]="turmaDisciplinaSelecionada" name="turmaDisciplinaSelecionada" ></p-dropdown>
+                <p-dropdown placeholder="Selecione Disciplina" required  [disabled]="disableDisciplina"  [filter]="true"  [autoWidth]="false" [options]="disciplinas" [(ngModel)]="disciplinaSelecionada" name="disciplinaSelecionada" ></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-md-8">

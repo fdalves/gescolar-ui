@@ -72,4 +72,11 @@ export class ChamadaService {
       .then(response => response);
   }
 
+
+  buscarDisciplinasAluno(codigo: number): Promise<any> {
+    return this.http.get<any>( `${environment.apiUrl}/disciplina/getDisciplinas/${codigo}`)
+      .toPromise()
+      .then(response => response);
+  }
+
 }

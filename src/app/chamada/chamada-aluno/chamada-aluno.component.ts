@@ -21,8 +21,9 @@ export class ChamadaAlunoComponent implements OnInit {
   alunos: any;
   alunoSelecionado: any;
   disableAluno = false;
-  turmaDisciplinas: any;
-  turmaDisciplinaSelecionada: any;
+  disableDisciplina = true
+  disciplinas: any;
+  disciplinaSelecionada: any;
   chamadas = []; 
   turmaDisciplinaFiltro: any;
   
@@ -40,6 +41,7 @@ export class ChamadaAlunoComponent implements OnInit {
       if (this.authService.jwtPayload.tipoUsuario.descTipoUsuario === 'ALUNO_RESPONSSAVEL') {
         this.disableAluno = true;
         this.alunoSelecionado = this.authService.jwtPayload.codigoProfessor;
+        this.disableDisciplina = false; 
         this.carregarTurmaDisciplina();
       }
   
@@ -62,6 +64,7 @@ export class ChamadaAlunoComponent implements OnInit {
     carregaAluno(): any {
       return this.alunoService.listarTodas()
         .then(alunos => {
+          this.disableDisciplina = false; 
           this.alunos = alunos
             .map(a => ({ label: a.nome, value: a.codigo }));
         })
@@ -69,14 +72,12 @@ export class ChamadaAlunoComponent implements OnInit {
     }
 
     carregarTurmaDisciplina(): any {
-      return this.chamadaService.getTurmasProfessor(this.alunoSelecionado)
+      return this.chamadaService.buscarDisciplinasAluno(this.alunoSelecionado)
         .then(turmaDisciplinas => {
-          this.turmaDisciplinaSelecionada = null;
-          this.chamadas = []; 
-          this.turmaDisciplinas = turmaDisciplinas.map(p => ({ label: p.turmaDisciplina, value: p.codigo }));
-          if (this.turmaDisciplinaFiltro) {
-            this.turmaDisciplinaSelecionada = this.turmaDisciplinaFiltro;
-          }
+          this.disciplinas = null;
+          this.disciplinas = turmaDisciplinas.map(d => 
+            ({ label: d.nome, value: d.codigo }));
+          
         })
         .catch(erro => this.errorHandler.handle(erro));
     }
@@ -85,7 +86,7 @@ export class ChamadaAlunoComponent implements OnInit {
     pesquisar(form: FormControl) {
       const chamada = new ChamadaPesquisa();
       chamada.codigoProfessor = this.alunoSelecionado;
-      chamada.codigoDisciplinaTurma= this.turmaDisciplinaSelecionada;
+     // chamada.codigoDisciplinaTurma= this.turmaDisciplinaSelecionada;
       chamada.dataIni = this.value;
       chamada.dataFim = this.value2;
       this.chamadaService.pesquisaChamada(chamada)
