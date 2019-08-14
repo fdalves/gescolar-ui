@@ -74,10 +74,10 @@ export class ChamadaAlunoComponent implements OnInit {
     carregarTurmaDisciplina(): any {
       return this.chamadaService.buscarDisciplinasAluno(this.alunoSelecionado)
         .then(turmaDisciplinas => {
-          this.disciplinas = null;
+          
           this.disciplinas = turmaDisciplinas.map(d => 
             ({ label: d.nome, value: d.codigo }));
-          
+            this.disciplinas.push({ label: "Todas", value: "%" })
         })
         .catch(erro => this.errorHandler.handle(erro));
     }
