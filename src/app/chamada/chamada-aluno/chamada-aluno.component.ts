@@ -24,7 +24,9 @@ export class ChamadaAlunoComponent implements OnInit {
   disableDisciplina = true
   disciplinas: any;
   disciplinaSelecionada: any;
-  chamadas = []; 
+  chamadas = [];
+  status = [];
+  statusSelecionado : any; 
   turmaDisciplinaFiltro: any;
   
   
@@ -57,7 +59,7 @@ export class ChamadaAlunoComponent implements OnInit {
         clear: 'Limpar'
       };
      
-  
+      this.status = [{label: "Todos", value: "%"},{label: "Presença", value: "true"},{label: "Faltas", value: "false"}]
     }
 
 

@@ -15,6 +15,10 @@
                 <p-dropdown placeholder="Selecione Disciplina" required  [disabled]="disableDisciplina"  [filter]="true"  [autoWidth]="false" [options]="disciplinas" [(ngModel)]="disciplinaSelecionada" name="disciplinaSelecionada" ></p-dropdown>
             </div>
 
+            <div class="ui-g-12 ui-md-7">
+              <p-dropdown placeholder="Selecione Status" required  [autoWidth]="false" [options]="status" [(ngModel)]="statusSelecionado" name="statusSelecionado" ></p-dropdown>
+          </div>
+
             <div class="ui-g-12 ui-md-8">
                 <div class="ui-g-12 ui-md-3">
                     <p-calendar [(ngModel)]="value" (onSelect)="changeDate()"   required  placeholder="Selecione a Data Inicial" showButtonBar="true"  dateFormat="dd/mm/yy" [locale]="pt" name="value"></p-calendar>
